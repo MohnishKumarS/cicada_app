@@ -85,8 +85,14 @@
                                         value="{{ old('email') }}" required autocomplete="email">
                                     <label for="floatingInput">Email address</label>
                                     @error('email')
+                                        {{-- <script>
+                                            $.Toast("Oops!", "Incorrect usermail or password", "error", {
+                                                timeout: 6000,
+                                                has_progress: true,
+                                            });
+                                        </script> --}}
                                         <span class="text-danger">
-                                            {{ $message }}
+                                            Incorrect usermail or password
                                         </span>
                                     @enderror
                                 </div>

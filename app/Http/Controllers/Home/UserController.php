@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function checkout(){
+        return 'success';
+    }
+
     public function account()
     {
         // return 'sad';

@@ -3,9 +3,8 @@
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
-                    <a href="index.html" class="logo">
-                        <img src="{{ asset('admin//assets/img/cicada/cicada.webp') }}" alt="navbar brand" class="navbar-brand"
-                            height="20" />
+                    <a href="{{url('/')}}" class="logo text-white" target="_blank">
+                        <img src="{{ asset('admin/assets/img/cicada/cicada.webp') }}" alt="navbar brand" class="navbar-brand " width="80" /> CICADA
                     </a>
                     <div class="nav-toggle">
                         <button class="btn btn-toggle toggle-sidebar">
@@ -25,12 +24,12 @@
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
                         <li class="nav-item active">
-                            <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                            <a  href="{{route('admin.dashboard')}}">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
-                                <span class="caret"></span>
+                                {{-- <span class="caret"></span> --}}
                             </a>
-                            <div class="collapse" id="dashboard">
+                            {{-- <div class="collapse" id="dashboard">
                                 <ul class="nav nav-collapse">
                                     <li>
                                         <a href="../demo1/index.html">
@@ -38,13 +37,35 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> --}}
                         </li>
                         <li class="nav-section">
                             <span class="sidebar-mini-icon">
                                 <i class="fa fa-ellipsis-h"></i>
                             </span>
                             <h4 class="text-section">Components</h4>
+                        </li>
+                        <li class="nav-item">
+                            <a data-bs-toggle="collapse" href="#banners_list">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Banners</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="banners_list">
+                                <ul class="nav nav-collapse" style="list-style: none">
+                                    <li>
+                                        <a href="{{ route('addBanner') }}">
+                                            <span class="ms-5">Add Banner</span>
+                                        </a>
+                                    </li>                                 
+                                    <li>
+                                        <a href="{{ route('viewBanner') }}">
+                                            <span class="ms-5">View Banner</span>
+                                        </a>
+                                    </li>                                 
+                             
+                                </ul>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#brands_list">
@@ -105,6 +126,28 @@
                                     <li>
                                         <a href="{{ route('view-products') }}">
                                             <span class="ms-5">View Products</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a data-bs-toggle="collapse" href="#register_list">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Registration</p>
+                                <span class="caret"></span>
+                            </a>
+                      
+                            <div class="collapse" id="register_list">
+                                <ul class="nav nav-collapse" style="list-style: none">
+                                    <li>
+                                        <a href="{{route('contact.view')}}">
+                                            <span class="ms-5">Contacts</span>
+                                        </a>
+                                    </li>                                 
+                                    <li>
+                                        <a href="{{ route('user.view') }}">
+                                            <span class="ms-5">Users</span>
                                         </a>
                                     </li>
                                 </ul>

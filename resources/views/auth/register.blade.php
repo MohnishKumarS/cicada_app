@@ -130,7 +130,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-floating mb-4">
-                                    <input type="text" class="form-control" name="mobile" placeholder="mobile"
+                                    <input type="text" class="form-control" name="mobile" placeholder="mobile" maxlength="10"
                                         value="{{ old('mobile') }}" required autocomplete="mobile">
                                     <label for="floatingInput">Mobile</label>
                                     @error('mobile')

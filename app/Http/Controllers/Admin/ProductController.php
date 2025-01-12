@@ -33,8 +33,8 @@ class ProductController extends Controller
             'sizes.*' => 'in:s,m,l,xl,xxl',
             'quantity' => 'required|integer|min:1',
             'actual_price' => 'required|integer|min:0',
-            'offer_price' => 'nullable|integer|min:0',
-            'brand_id' => 'nullable|exists:brands,id',
+            'offer_price' => 'required|integer|min:0',
+            'brand_id' => 'required|exists:brands,id',
             'category_id' => 'required|exists:categories,id',
             'main_img' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
             'additional_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -98,7 +98,8 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail
+        ($id);
         $brand = Brands::where('brand_status', 1)->get();
         $category = Category::where('status', 1)->get();
         return view('admin.product.edit-product', compact('product', 'brand', 'category'));
@@ -122,7 +123,7 @@ class ProductController extends Controller
             
         ]);
 
-        $product =  Product::Find($id);
+        $product =  Product::findOrFail($id);
 
         $product->product_name = $request->input('product_name');
 
@@ -170,7 +171,7 @@ class ProductController extends Controller
     }
 
     public function toggleStatus(Request $request, $id){
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         if ($product) {
             $product->status = $request->status;
             $product->save();
@@ -184,7 +185,7 @@ class ProductController extends Controller
 
     public function delete($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         if ($product) {
             if ($product->main_img) {
                 File::delete('admin-files/products/' . $product->main_img);

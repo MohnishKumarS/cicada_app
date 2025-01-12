@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Brands;
-use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ViewProductController extends Controller
 {
@@ -27,8 +28,10 @@ class ViewProductController extends Controller
             ->with(['product' => function ($query) {
                 $query->where('status', 1);
             }])->get();
+        $mobBanner = Banner::where('view','mobile')->where('status','1')->orderBy('order','asc')->get();    
+        $deskBanner = Banner::where('view','desktop')->where('status','1')->orderBy('order','asc')->first();    
 
-        return view('index', compact('category_products', 'featuredProducts' ,'brands'));
+        return view('index', compact('category_products', 'featuredProducts' ,'brands','mobBanner','deskBanner'));
     }
 
     public function show($slug)

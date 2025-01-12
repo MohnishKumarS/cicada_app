@@ -49,28 +49,15 @@
             <div class="ccd-nav__bottom sm-hide">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{'/'}}">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('collections')}}">All Collections</a>
-                    </li>
-                    {{-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item link link--hover" href="#">Action</a></li>
-                            <li><a class="dropdown-item link link--hover" href="#">Another action</a></li>
-                            <li><a class="dropdown-item link link--hover" href="#">Something else</a></li>
-                        </ul>
-                    </li> --}}
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="#">Products</a>
+                        <a class="nav-link" href="{{route('collections')}}">Collections</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Shop</a>
-                    </li> --}}
+                        <a class="nav-link" href="{{route('contactus')}}">ContactUs</a>
+                    </li>
+                 
                 </ul>
             </div>
         </div>
@@ -102,17 +89,17 @@
         <div class="offcanvas-body p-0">
             <ul class="ccd-menu__items">
                 <li class="ccd-menu__item">
-                    <a href="{{'/'}}" class="ccd-menu__link active">Home</a>
+                    <a href="{{url('/')}}"  class="ccd-menu__link {{Request::is('/')? 'active':''}}">Home</a>
                 </li>
                 <li class="ccd-menu__item">
-                    <a href="{{'all-collections'}}" class="ccd-menu__link">ALl Collections</a>
+                    <a href="{{route('collections')}}" class="ccd-menu__link {{Request::is('collections')? 'active':''}}">Collections</a>
                 </li>
                 <li class="ccd-menu__item">
-                    <a href="products.html" class="ccd-menu__link">All Product</a>
+                    <a href="{{route('contactus')}}" class="ccd-menu__link {{Request::is('contact-us')? 'active':''}}">ContactUs</a>
                 </li>
-                <li class="ccd-menu__item">
+                {{-- <li class="ccd-menu__item">
                     <a href="product.html" class="ccd-menu__link">Product</a>
-                </li>
+                </li> --}}
 
 
             </ul>

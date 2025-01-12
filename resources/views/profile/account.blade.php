@@ -163,7 +163,7 @@
                                                         <label for="email">Email address</label>
                                                     </div>
                                                     <div class="form-floating mb-4">
-                                                        <input type="text" class="form-control" id="mobile"
+                                                        <input type="text" class="form-control" id="mobile" maxlength="10"
                                                             placeholder="name@example.com"
                                                             value="{{ auth()->user()->mobile }}">
                                                         <label for="mobile">mobile</label>

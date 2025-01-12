@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="shortcut icon" href="{{ asset('images/cicada.webp') }}" type="image/x-icon">
+
+    <title>Cicada | Dashboard</title>
 
     {{-- css stylesheet  --}}
     @include('admin.links.styles')

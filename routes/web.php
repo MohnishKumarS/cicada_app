@@ -2,14 +2,17 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Home\CartController;
+use App\Http\Controllers\Home\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Home\ViewProductController;
-use App\Http\Controllers\Home\CartController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\Home\CollectionController;
-use App\Http\Controllers\Home\UserController;
+use App\Http\Controllers\Home\ViewProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +25,9 @@ use App\Http\Controllers\Home\UserController;
 |
 */
 
-Route::get('/view-order', function () {
-    return 'sadas';
-});
+// Route::get('/view-order', function () {
+//     return 'sadas';
+// });
 ## featured products
 Route::get('/', [ViewProductController::class, 'homePage'])->name('homePage');
 Route::get('/productbuy/{slug}', [ViewProductController::class, 'show'])->name('product.show');
@@ -33,7 +36,9 @@ Route::get('/productbuy/{slug}', [ViewProductController::class, 'show'])->name('
 Auth::routes();
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('contact-us',[HomeController::class,'contactUs'])->name('contactus');
+Route::post('/contact/store', [ContactController::class, 'contactStore']);
 
 
 ## carts 
@@ -59,16 +64,28 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/update-password', [UserController::class, 'updatePassword']);
 
 
-});
+    Route::get('/checkout', [UserController::class, 'checkout']);
 
-Route::get('/checkout', function() {
-    return 'working';
+
 });
 
 ## Admin Control  Routes
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     ## Dashboard  Routes
-    Route::get('dashboard', [AdminController::class, 'adminIndex']);
+    Route::get('dashboard', [AdminController::class, 'adminIndex'])->name('admin.dashboard');
+    Route::get('contact/view', [AdminController::class, 'contactView'])->name('contact.view');
+    Route::get('user/view', [AdminController::class, 'userView'])->name('user.view');
+
+    ## Banners  Routes
+    Route::prefix('banner')->group(function () {
+        Route::get('add', [BannerController::class, 'add'])->name('addBanner');
+        Route::post('store', [BannerController::class, 'store']);
+        Route::get('view', [BannerController::class, 'view'])->name('viewBanner');
+        Route::get('edit/{id}', [BannerController::class, 'edit'])->name('editBanner');
+        Route::post('update/{id}', [BannerController::class, 'update'])->name('updateBanner');
+        Route::delete('delete/{id}', [BannerController::class, 'delete'])->name('deleteBanner');
+
+    });
 
     ## Brand  Routes
     Route::prefix('brands')->group(function () {

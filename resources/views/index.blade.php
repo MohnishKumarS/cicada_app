@@ -11,6 +11,16 @@
                     <div class="swiper" id="banner__swiper-mob">
                         <div class="swiper-wrapper">
                             <!-- Slides -->
+                            @forelse ($mobBanner as $val)
+                            <div class="swiper-slide">
+
+                                <div class="product__media-pic">
+                                    <img src="{{ asset('admin-files/banners/'.$val->image) }}" class="product__media-pic img-fluid"
+                                        alt="product-img" loading="lazy">
+                                </div>
+
+                            </div>
+                            @empty
                             <div class="swiper-slide">
 
                                 <div class="product__media-pic">
@@ -27,6 +37,8 @@
                                 </div>
 
                             </div>
+                            @endforelse
+                    
 
                         </div>
                         <!-- If we need pagination -->
@@ -34,9 +46,15 @@
 
                     </div>
                 </div>
+                {{-- desk view --}}
                 <div class="ccd-banner__desk sm-hide">
                     <div class="ccd-banner__slide">
-                        <img src="{{ asset('images/b2.jpg') }}" class="ccd-banner__img" alt="" loading="lazy">
+                        @if ($deskBanner)
+                        <img src="{{ asset('admin-files/banners/'.$deskBanner->image) }}" class="ccd-banner__img img-fluid" alt="" loading="lazy">
+                        @else
+                        <img src="{{ asset('images/b6.jpg') }}" class="ccd-banner__img img-fluid" alt="" loading="lazy">
+                        @endif
+                        
                     </div>
                 </div>
             </div>
@@ -121,3 +139,36 @@
 
     
 @endsection
+
+@push('scripts')
+<script>
+    const swiperBanner = new Swiper('#banner__swiper-mob', {
+        "autoplay": {
+            "delay": 5000
+        },
+        "slidesPerView": 4,
+        "slidesPerGroup": 4,
+        "effect": "none",
+        "loop": false,
+        "pagination": {
+            "el": '.swiper-pagination',
+            "clickable": true,
+        },
+        "breakpoints": {
+            "320": {
+                "slidesPerView": 1,
+                "slidesPerGroup": 1,
+                "spaceBetween": 10
+            },
+
+            // "1200": {
+            //     "slidesPerView": 4,
+            //     "slidesPerGroup": 1,
+            //     "spaceBetween": 60,
+            //     "pagination": false
+            // }
+        },
+        grabCursor: true,
+    });
+</script>
+@endpush

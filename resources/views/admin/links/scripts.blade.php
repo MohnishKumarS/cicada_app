@@ -37,57 +37,176 @@
 <script src="{{ asset('admin/assets/js/setting-demo.js') }}"></script>
 <script src="{{ asset('admin/assets/js/demo.js') }}"></script>
 <script>
-      $(document).ready(function() {
+    $(document).ready(function() {
         $('#size').select2();
     });
-    $(document).ready(function () {
-      $("#brandsTable").DataTable({});
-      $("#categoriesTable").DataTable({});
-      $("#productsTable").DataTable({});
+    $(document).ready(function() {
+        $("#brandsTable").DataTable({});
+        $("#categoriesTable").DataTable({});
+        $("#productsTable").DataTable({});
+        $("#bannersTable").DataTable({});
+        $("#contactsTable").DataTable({});
+        $("#usersTable").DataTable({});
 
     });
-  </script>
+
+
+</script>
 
 <script>
+    // ##== For Banner scripts
+    $(".delete-banner").click(function() {
+        var bannerId = $(this).data('id');
+        var userURL = $(this).data('url');
+        var trObj = $(this);
 
-  // ##== For Brand scripts
- 
-    $(".brand-status").click(function(){
-      var brandId = $(this).data('id');
-      var currentStatus = $(this).data('status');
-      var newStatus = currentStatus == 1 ? 0 : 1; 
-     console.log(brandId, currentStatus, newStatus)
-     
-      $.ajax({
-          url: '{{ url("/brands/brand-status") }}/' + brandId,
-          type: 'POST',
-          data: {
-              _token: '{{ csrf_token() }}',
-              brand_status: newStatus
-          },
-          success: function(response) {
-              if (response.success) {
-                  if (newStatus == 1) {
-                      $(this).removeClass('btn-danger').addClass('btn-success');
-                      $(this).text('Active');
-                  } else {
-                      $(this).removeClass('btn-success').addClass('btn-danger');
-                      $(this).text('Inactive');
-                  }
-                  $(this).data('status', newStatus); 
-              }
-          }.bind(this),
-          error: function() {
-              alert('An error occurred while updating the status.');
-          }
-      });
-  });
-  $(".delete-brand").click(function(){
-    var brandId = $(this).data('id');
-    var userURL = $(this).data('url');
-    var trObj = $(this);
+        if (confirm("Are you sure you want to delete this banner?") == true) {
+       
+            $.ajax({
+                url: userURL,
+                type: 'DELETE',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    if (data.success) {
+                        $('#banner-row-' + bannerId).fadeOut(500, function() {
+                            $(this).remove();
+                        });
+                        $('#delete-message').html(
+                            '<div class="alert alert-success">Banner deleted successfully!</div>'
+                        );
+                        // $('#bannersTable').DataTable().ajax.reload();
+                        // Reload DataTable
+                    
+                        // let table = $('#bannersTable').DataTable(); // Get the DataTable instance
+                        // table.ajax.reload(null, false);
+                    } else {
+                        $('#delete-message').html(
+                            '<div class="alert alert-danger">An error occurred. Please try again.</div>'
+                        );
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    $('#delete-message').html(
+                        '<div class="alert alert-danger">An error occurred. Please try again.</div>'
+                    );
+                }
+            });
+        }
+    });
 
-    if (confirm("Are you sure you want to delete this brand?") == true) {
+    // ##== For Brand scripts
+
+    $(".brand-status").click(function() {
+        var brandId = $(this).data('id');
+        var currentStatus = $(this).data('status');
+        var newStatus = currentStatus == 1 ? 0 : 1;
+        console.log(brandId, currentStatus, newStatus)
+
+        $.ajax({
+            url: '{{ url('/brands/brand-status') }}/' + brandId,
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                brand_status: newStatus
+            },
+            success: function(response) {
+                if (response.success) {
+                    if (newStatus == 1) {
+                        $(this).removeClass('btn-danger').addClass('btn-success');
+                        $(this).text('Active');
+                    } else {
+                        $(this).removeClass('btn-success').addClass('btn-danger');
+                        $(this).text('Inactive');
+                    }
+                    $(this).data('status', newStatus);
+                }
+            }.bind(this),
+            error: function() {
+                alert('An error occurred while updating the status.');
+            }
+        });
+    });
+    $(".delete-brand").click(function() {
+        var brandId = $(this).data('id');
+        var userURL = $(this).data('url');
+        var trObj = $(this);
+
+        if (confirm("Are you sure you want to delete this brand?") == true) {
+            $.ajax({
+                url: userURL,
+                type: 'DELETE',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    if (data.success) {
+                        $('#brand-row-' + brandId).fadeOut(500, function() {
+                            $(this).remove();
+                        });
+                        $('#delete-message').html(
+                            '<div class="alert alert-success">Brand deleted successfully!</div>'
+                        );
+                        $('#table-id').DataTable().ajax.reload();
+                    } else {
+                        $('#delete-message').html(
+                            '<div class="alert alert-danger">An error occurred. Please try again.</div>'
+                        );
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    $('#delete-message').html(
+                        '<div class="alert alert-danger">An error occurred. Please try again.</div>'
+                    );
+                }
+            });
+        }
+    });
+    // ##== For category scripts
+    $(".category-status").click(function() {
+        var categoryId = $(this).data('id');
+        var currentStatus = $(this).data('status');
+        var newStatus = currentStatus == 1 ? 0 : 1;
+        console.log(categoryId, currentStatus, newStatus)
+
+        $.ajax({
+            url: '{{ url('/category/category-status') }}/' + categoryId,
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                status: newStatus
+            },
+            success: function(response) {
+                if (response.success) {
+                    if (newStatus == 1) {
+                        $(this).removeClass('btn-danger').addClass('btn-success');
+                        $(this).text('Active');
+                    } else {
+                        $(this).removeClass('btn-success').addClass('btn-danger');
+                        $(this).text('Inactive');
+                    }
+                    $(this).data('status', newStatus);
+                }
+            }.bind(this),
+            error: function() {
+                alert('An error occurred while updating the status.');
+            }
+        });
+    })
+
+
+
+    $(".delete-category").click(function() {
+        var categoryId = $(this).data('id');
+        var userURL = $(this).data('url');
+        var trObj = $(this);
         $.ajax({
             url: userURL,
             type: 'DELETE',
@@ -96,126 +215,67 @@
             },
             dataType: 'json',
             success: function(data) {
-                console.log(data); 
-                if (data.success) {       
-                    $('#brand-row-' + brandId).fadeOut(500, function() {
-                        $(this).remove();
-                    });
-                    $('#delete-message').html('<div class="alert alert-success">Brand deleted successfully!</div>');
-                    $('#table-id').DataTable().ajax.reload();
-                } else {
-                    $('#delete-message').html('<div class="alert alert-danger">An error occurred. Please try again.</div>');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log(xhr.responseText); 
-                $('#delete-message').html('<div class="alert alert-danger">An error occurred. Please try again.</div>');
-            }
-        });
-    }
-});
-  // ##== For category scripts
-  $(".category-status").click(function(){
-    var categoryId = $(this).data('id');
-      var currentStatus = $(this).data('status');
-      var newStatus = currentStatus == 1 ? 0 : 1; 
-     console.log(categoryId, currentStatus, newStatus)
-     
-      $.ajax({
-          url: '{{ url("/category/category-status") }}/' + categoryId,
-          type: 'POST',
-          data: {
-              _token: '{{ csrf_token() }}',
-              status: newStatus
-          },
-          success: function(response) {
-              if (response.success) {
-                  if (newStatus == 1) {
-                      $(this).removeClass('btn-danger').addClass('btn-success');
-                      $(this).text('Active');
-                  } else {
-                      $(this).removeClass('btn-success').addClass('btn-danger');
-                      $(this).text('Inactive');
-                  }
-                  $(this).data('status', newStatus); 
-              }
-          }.bind(this),
-          error: function() {
-              alert('An error occurred while updating the status.');
-          }
-      });
-  })
-  
-
-
-$(".delete-category").click(function(){
-  var categoryId = $(this).data('id');
-    var userURL = $(this).data('url');
-    var trObj = $(this);
-    $.ajax({
-            url: userURL,
-            type: 'DELETE',
-            data: {
-                _token: '{{ csrf_token() }}'
-            },
-            dataType: 'json',
-            success: function(data) {
-                console.log(data); 
-                if (data.success) {       
+                console.log(data);
+                if (data.success) {
                     $('#category-row-' + categoryId).fadeOut(500, function() {
                         $(this).remove();
                     });
-                    $('#categoryTable-msg').html('<div class="alert alert-success">category deleted successfully!</div>');
+                    $('#categoryTable-msg').html(
+                        '<div class="alert alert-success">category deleted successfully!</div>');
                     $('#table-id').DataTable().ajax.reload();
                 } else {
-                    $('#categoryTable-msg').html('<div class="alert alert-danger">An error occurred. Please try again.</div>');
+                    $('#categoryTable-msg').html(
+                        '<div class="alert alert-danger">An error occurred. Please try again.</div>'
+                    );
                 }
             },
             error: function(xhr, status, error) {
-                console.log(xhr.responseText); 
-                $('#categoryTable-msg').html('<div class="alert alert-danger">An error occurred. Please try again.</div>');
+                console.log(xhr.responseText);
+                $('#categoryTable-msg').html(
+                    '<div class="alert alert-danger">An error occurred. Please try again.</div>'
+                );
             }
         });
 
-})
-  // ## == For product scripts
+    })
+    // ## == For product scripts
 
-  $(".product-status").click(function(){
-    var productId = $(this).data('id');
-      var currentStatus = $(this).data('status');
-      var newStatus = currentStatus == 1 ? 0 : 1; 
-     console.log(productId, currentStatus, newStatus)
-     
-      $.ajax({
-          url: '{{ url("/product/product-status") }}/' + productId,
-          type: 'POST',
-          data: {
-              _token: '{{ csrf_token() }}',
-              status: newStatus
-          },
-          success: function(response) {
-              if (response.success) {
-                  if (newStatus == 1) {
-                      $(this).removeClass('btn-danger').addClass('btn-success');
-                      $(this).text('Active');
-                  } else {
-                      $(this).removeClass('btn-success').addClass('btn-danger');
-                      $(this).text('Inactive');
-                  }
-                  $(this).data('status', newStatus); 
-              }
-          }.bind(this),
-          error: function() {
-              alert('An error occurred while updating the status.');
-          }
-      });
-  })
+    $(".product-status").click(function() {
+        var productId = $(this).data('id');
+        var currentStatus = $(this).data('status');
+        var newStatus = currentStatus == 1 ? 0 : 1;
+        console.log(productId, currentStatus, newStatus)
 
-  $(".delete-product").click(function(){
-  var productId = $(this).data('id');
-    var userURL = $(this).data('url');
-    var trObj = $(this);
-    $.ajax({
+        $.ajax({
+            url: '{{ url('/product/product-status') }}/' + productId,
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                status: newStatus
+            },
+            success: function(response) {
+                if (response.success) {
+                    if (newStatus == 1) {
+                        $(this).removeClass('btn-danger').addClass('btn-success');
+                        $(this).text('Active');
+                    } else {
+                        $(this).removeClass('btn-success').addClass('btn-danger');
+                        $(this).text('Inactive');
+                    }
+                    $(this).data('status', newStatus);
+                }
+            }.bind(this),
+            error: function() {
+                alert('An error occurred while updating the status.');
+            }
+        });
+    })
+
+    $(".delete-product").click(function() {
+        var productId = $(this).data('id');
+        var userURL = $(this).data('url');
+        var trObj = $(this);
+        $.ajax({
             url: userURL,
             type: 'DELETE',
             data: {
@@ -223,65 +283,29 @@ $(".delete-category").click(function(){
             },
             dataType: 'json',
             success: function(data) {
-                console.log(data); 
-                if (data.success) {       
+                console.log(data);
+                if (data.success) {
                     $('#product-row-' + productId).fadeOut(500, function() {
                         $(this).remove();
                     });
-                    $('#productTable-msg').html('<div class="alert alert-success">product deleted successfully!</div>');
+                    $('#productTable-msg').html(
+                        '<div class="alert alert-success">product deleted successfully!</div>');
                     $('#table-id').DataTable().ajax.reload();
                 } else {
-                    $('#productTable-msg').html('<div class="alert alert-danger">An error occurred. Please try again.</div>');
+                    $('#productTable-msg').html(
+                        '<div class="alert alert-danger">An error occurred. Please try again.</div>'
+                    );
                 }
             },
             error: function(xhr, status, error) {
-                console.log(xhr.responseText); 
-                $('#productTable-msg').html('<div class="alert alert-danger">An error occurred. Please try again.</div>');
+                console.log(xhr.responseText);
+                $('#productTable-msg').html(
+                    '<div class="alert alert-danger">An error occurred. Please try again.</div>'
+                );
             }
         });
 
-})
+    })
 
-// Add to cart
-
-// function addToCart(productId) {
-//     alert("tyy")
-//     const quantity = document.querySelector('input[name="quantity"]').value; // Get the quantity
-//     const selectedSize = document.querySelector('input[name="size"]:checked').value; // Get the selected size
-
-//     fetch("{{ route('cart.add') }}", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "X-CSRF-TOKEN": "{{ csrf_token() }}"
-//         },
-//         body: JSON.stringify({
-//             product_id: productId,
-//             quantity: quantity,
-//             size: selectedSize // Send the selected size
-//         })
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         if (data.success) {
-//             // Populate modal with product details
-//             document.getElementById('modalProductName').innerText = data.product_name;
-//             document.getElementById('modalProductSize').innerText = `Size: ${data.product_size}`;
-//             document.getElementById('modalProductImage').src = data.product_image;
-
-//             // Update cart count
-//             document.getElementById('cartCount').innerText = data.cart_count; // Update this as needed
-
-//             // Show the modal
-//             const viewCartModal = new bootstrap.Modal(document.getElementById('viewCartModal'));
-//             viewCartModal.show();
-//         } else {
-//             console.error(data.message); // Log any error messages
-//         }
-//     })
-//     .catch(error => {
-//         console.error('Error:', error);
-//     });
-// }
-
+   
 </script>

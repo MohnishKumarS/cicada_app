@@ -17,7 +17,7 @@
                                             width="150" height="150" loading="lazy">
                                     </li>
                                     @php
-                                        $other_img = explode(',', $product->additional_images);
+                                        $other_img = empty($product->additional_images) ? [] : explode(',', $product->additional_images);
                                     @endphp
                                     @if (count($other_img))
                                         @foreach ($other_img as $img)
@@ -354,3 +354,30 @@
     </section>
 
 @endsection
+
+@push('scripts')
+    <script>
+        const swiper = new Swiper('#product__swiper-mob', {
+            "autoplay": {
+                "delay": 5000
+            },
+            "slidesPerView": 4,
+            "slidesPerGroup": 4,
+            "effect": "none",
+            "loop": false,
+            "pagination": {
+                "el": '.swiper-pagination',
+                "clickable": true,
+            },
+            "breakpoints": {
+                "320": {
+                    "slidesPerView": 1,
+                    "slidesPerGroup": 1,
+                    "spaceBetween": 10
+                },
+
+            },
+            grabCursor: true,
+        });
+    </script>
+@endpush

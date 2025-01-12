@@ -93,7 +93,7 @@ class BrandController extends Controller
             'brand_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $brand = Brands::find($id);
+        $brand = Brands::findOrFail($id);
 
         if (!$brand) {
             return redirect()->back()->with('error', 'Brand not found.');
@@ -124,7 +124,7 @@ class BrandController extends Controller
 
     public function delete($id)
     {
-        $brand = Brands::find($id);
+        $brand = Brands::findOrFail($id);
 
         if ($brand) {
             $categoryArr = Category::where('brand_id', $id)->get();
