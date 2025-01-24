@@ -11,18 +11,11 @@ use App\Http\Controllers\Controller;
 
 class ViewProductController extends Controller
 {
-    //
-
-    // public function featureProducts()
-    // {
-
-    //     $featuredProducts = Product::where('trending', 1)->get();
-    //     return view('index', compact('featuredProducts'));
-    // }
 
     public function homePage()
     {
         $featuredProducts = Product::where('trending', 1)->take(6)->get();
+        $latestProducts = Product::latest()->take(4)->get();
         $brands = Brands::where('brand_status',1)->where('slug','!=','cicada')->get();
         $category_products = Category::where('status', 1)
             ->with(['product' => function ($query) {
@@ -31,7 +24,7 @@ class ViewProductController extends Controller
         $mobBanner = Banner::where('view','mobile')->where('status','1')->orderBy('order','asc')->get();    
         $deskBanner = Banner::where('view','desktop')->where('status','1')->orderBy('order','asc')->first();    
 
-        return view('index', compact('category_products', 'featuredProducts' ,'brands','mobBanner','deskBanner'));
+        return view('index', compact('category_products', 'featuredProducts','latestProducts','brands','mobBanner','deskBanner'));
     }
 
     public function show($slug)

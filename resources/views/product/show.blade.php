@@ -32,7 +32,7 @@
                                 </ul>
                             </div>
 
-                            <div class="product__media-slider lg-hide">
+                            <div class="product__media-slider lg-hide mb-3">
                                 <div class="swiper" id="product__swiper-mob">
                                     <div class="swiper-wrapper">
                                         <!-- Slides -->
@@ -345,7 +345,7 @@
                         @endforeach
                     </div>
                     <div class="ccd-card__link text-center">
-                        <a href="#" class="btn-main">See more</a>
+                        <a href="{{route('collections')}}" class="btn-main">See more</a>
                     </div>
                 </div>
             </div>

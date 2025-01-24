@@ -13,12 +13,14 @@
                 </div>
                 
                 @php
-                // print_r($cartItems);
+                print_r($validCartItems);
+                echo "<br>";
                 // Group cart items by product_id and size
-                $groupedCartItems = collect($cartItems)->groupBy(function ($item) {
+                $groupedCartItems = collect($validCartItems)->groupBy(function ($item) {
                  return $item['product_id'] . '_' . $item['size']; 
                 });
                 $grandTotal = 0;
+                // print_r($groupedCartItems);
                 @endphp
                 {{-- {{$groupedCartItems}} --}}
                @if(count($groupedCartItems) > 0)
@@ -35,14 +37,13 @@
                         @foreach($groupedCartItems as $groupKey => $group)
                         @php   
                             $cartItem = $group->first();
-                            // print_r($cartItem);
                             $product = $products->firstWhere('id', $cartItem['product_id']);
                             $totalQuantity = $group->sum('quantity');
                             // Calculate total price for this group
                            $groupTotalPrice = $product->offer_price * $totalQuantity;
                            $grandTotal += $groupTotalPrice; // Add to the grand total
                         @endphp
-                        
+                        {{$group}}
                         @if($product)
                         <tr class="cart-item" id="{{ $cartItem['product_id'] }}-{{ $cartItem['size'] }}">
                             <td class="cart-item__media">
@@ -141,7 +142,7 @@
                     </div>
                 </div>
             </div>  
-            @else                         
+            @else     
             <div class="ccd--empty" >
                 <div class="ccd-empty__icon">
                     <img src="images/cicada.webp" class="img-fluid ccd-empty__logo" width="100" height="100"

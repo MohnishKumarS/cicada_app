@@ -55,10 +55,23 @@ class CartController extends Controller
         $cartItems = $cart ? json_decode($cart, true) : [];
         $productIds = array_column($cartItems, 'product_id');
         $products = Product::whereIn('id', $productIds)->get();
+        
+            // Filter out invalid cart items
+    $validCartItems = [];
+    foreach ($cartItems as $item) {
+        $product = $products->firstWhere('id', $item['product_id']);
+        if ($product) {
+            $validCartItems[] = $item;
+        }
+    }
+
+    // Update the cart cookie with valid items
+    Cookie::queue('cart', json_encode($validCartItems), 60 * 24 * 30); // 30 days
+
         $featuredProducts = Product::where('trending', 1)->take(6)->get();
 
         // Pass the cart items and products to the view
-        return view('home-parts.cart', compact('cartItems', 'products','featuredProducts'));
+        return view('home-parts.cart', compact('cartItems','validCartItems', 'products','featuredProducts'));
     }
 
     public function removeItemFromCart(Request $request)

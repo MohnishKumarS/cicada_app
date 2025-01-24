@@ -207,7 +207,8 @@
         var categoryId = $(this).data('id');
         var userURL = $(this).data('url');
         var trObj = $(this);
-        $.ajax({
+        if (confirm("Are you sure you want to delete this category?") == true) {
+            $.ajax({
             url: userURL,
             type: 'DELETE',
             data: {
@@ -236,6 +237,8 @@
                 );
             }
         });
+        };
+     
 
     })
     // ## == For product scripts
@@ -244,9 +247,9 @@
         var productId = $(this).data('id');
         var currentStatus = $(this).data('status');
         var newStatus = currentStatus == 1 ? 0 : 1;
-        console.log(productId, currentStatus, newStatus)
-
-        $.ajax({
+        // console.log(productId, currentStatus, newStatus)
+        if (confirm("Are you sure you want to delete this product?") == true) {
+            $.ajax({
             url: '{{ url('/product/product-status') }}/' + productId,
             type: 'POST',
             data: {
@@ -269,13 +272,17 @@
                 alert('An error occurred while updating the status.');
             }
         });
+        }
+
+       
     })
 
     $(".delete-product").click(function() {
         var productId = $(this).data('id');
         var userURL = $(this).data('url');
         var trObj = $(this);
-        $.ajax({
+        if (confirm("Are you sure you want to delete this product?") == true) {
+            $.ajax({
             url: userURL,
             type: 'DELETE',
             data: {
@@ -304,6 +311,8 @@
                 );
             }
         });
+        }
+      
 
     })
 

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use App\Models\Brands;
+use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 
 
@@ -95,13 +96,13 @@ class BrandController extends Controller
 
         $brand = Brands::findOrFail($id);
 
-        if (!$brand) {
-            return redirect()->back()->with('error', 'Brand not found.');
-        }
 
         $brand->brand_name = $request->input('brand_name');
         $brand->slug = Str::slug($request->input('brand_name'));
         if ($request->hasFile('brand_icon')) {
+            if ($brand->brand_icon) {
+                File::delete('admin-files/brands/brand-icon/'. $brand->brand_icon);
+            }
             $iconFile = $request->file('brand_icon');
             $iconName = time() . '.' . $iconFile->getClientOriginalExtension();
             $iconFile->move(public_path('admin-files/brands/brand-icon'), $iconName);
@@ -109,6 +110,9 @@ class BrandController extends Controller
         }
 
         if ($request->hasFile('brand_image')) {
+            if ($brand->brand_img) {
+                File::delete('admin-files/brands/brand-img/'. $brand->brand_img);
+            }
             $imageFile = $request->file('brand_image');
             $imgName = time() . '.' . $imageFile->getClientOriginalExtension();
             $imageFile->move(public_path('admin-files/brands/brand-img'), $imgName);
@@ -128,7 +132,7 @@ class BrandController extends Controller
 
         if ($brand) {
             $categoryArr = Category::where('brand_id', $id)->get();
-
+            // delete category
             if ($categoryArr->count() > 0) {
                 foreach ($categoryArr as $category) {
                     if ($category->category_image) {
@@ -137,10 +141,29 @@ class BrandController extends Controller
                     $category->delete();
                 }
             }
-            
-            if ($brand->brand_icon) {
-                File::delete('admin-files/brands/brand-icon/' . $brand->brand_icon);
+
+            // delete products
+            $productArr = Product::where('brand_id', $id)->get();
+            if ($productArr->count() > 0) {
+                foreach ($productArr as $product) {
+                    if ($product->main_img) {
+                        File::delete('admin-files/products/'. $product->main_img);
+                    }
+                    if($product->additional_images){
+                        $additionalImages = explode(',', $product->additional_images);
+                        foreach ($additionalImages as $image) {
+                            File::delete('admin-files/products/'. $image);
+                        }
+                    }
+                    $product->delete();
+                }
             }
+
+            // delete brand image and icon if exists
+            if ($brand->brand_icon) {
+                File::delete('admin-files/brands/brand-icon/'. $brand->brand_icon);
+            }
+            
             if ($brand->brand_img) {
                 File::delete('admin-files/brands/brand-img/' . $brand->brand_img);
             }
@@ -149,7 +172,7 @@ class BrandController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Brand and associated categories deleted successfully.'
+                'message' => 'Brand and associated categories & products deleted successfully.'
             ]);
         }
         return response()->json([

@@ -16,8 +16,9 @@
                             </a>
                         </li>
                         <li class="ccd-nav__item">
-                            <a href="{{url('/')}}" class="ccd-nav__link">
-                                <img src="{{asset('images/logo.avif')}}" class="ccd-nav__brand" alt="cicada-logo">
+                            <a href="{{url('/')}}" class="ccd-nav__link logo--head">
+                                {{-- <img src="{{asset('images/logo.avif')}}" class="ccd-nav__brand" alt="cicada-logo"> --}}
+                                CICADA
                             </a>
                         </li>
                         <li class="ccd-nav__item">

@@ -687,6 +687,19 @@
     }
 }
 
+     /* ---- policies --- */
+     .policy-wrap{
+        .policy-wrap_head{
+            font-size: 20px;
+            margin: 20px 0 10px;
+        }
+        .policy-wrap_body p{
+            font-size: 15px;
+            color: #b2b2b2;
+            line-height: 1.5rem;
+        }
+    }
+
 
 /* --- footer --- */
 .ccd-footer {

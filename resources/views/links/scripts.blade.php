@@ -164,6 +164,7 @@
                             totalPrice);
                         updateCartTotal(cart);
                         updateCartCount(cart);
+                        $('.ccd--cart').load(location.href + ' .ccd--cart');
                     })
 
                 }

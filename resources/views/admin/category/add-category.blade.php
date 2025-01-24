@@ -57,6 +57,9 @@
                                 <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
                             @endforeach
                         </select>
+                        @error('brand_id')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     
                       <div class="form-group">
