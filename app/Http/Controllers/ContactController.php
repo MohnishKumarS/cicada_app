@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+
+    public function contactUs(){
+        return view('profile.contact');
+    }
+    
     public function contactStore(Request $req){
         $data = Contact::create($req->all());
 

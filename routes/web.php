@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Home\CartController;
@@ -38,7 +39,7 @@ Auth::routes();
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('contact-us',[HomeController::class,'contactUs'])->name('contactus');
+Route::get('contact-us',[ContactController::class,'contactUs'])->name('contactus');
 Route::post('/contact/store', [ContactController::class, 'contactStore']);
 ## Policies
 Route::view('privacy-policy', 'policy.privacy')->name('policy.privacy');
@@ -72,6 +73,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/checkout', [UserController::class, 'checkout']);
+    Route::post('/submit-order', [OrderController::class, 'submitOrder'])->name('submitOrder');
+
 
 
 });

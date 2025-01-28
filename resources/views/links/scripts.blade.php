@@ -53,7 +53,7 @@
             color: color,
             quantity: parseInt(quantity),
             product_name: $('.product__title').text(),
-            product_price: $('.price-sell').text().trim(),
+            product_price: $('.price-sell').text().trim().replace(/[^\d]/g, ''),
             product_image: $('#productImage').attr('src')
         };
 
@@ -97,17 +97,20 @@
 
     }
 
-    function removeItemFromCart(productId, size) {
-        var t_row = $("#" + productId + '-' + size);
+    function removeItemFromCart(productId, size, color) {
+        var t_row = $("#" + productId + '-' + size + '-' + color);
         $.ajax({
             url: '/remove-item-from-cart',
             type: 'POST',
             data: {
                 product_id: productId,
                 size: size,
+                color: color,
                 _token: '{{ csrf_token() }}'
             },
             success: function(response) {
+                // console.log(response);
+
                 if (response.status === 'success') {
                     t_row.remove();
                     console.log('Item removed from cart');
@@ -124,7 +127,8 @@
 
     function CartQuantityChange(element, quantityChange) {
         const productId = element.dataset.productId;
-        const size = element.dataset.size;
+        const size = element.dataset.size || '';
+        const color = element.dataset.color || '';
         const input = element.closest('.input-group').querySelector('.cart-quantity');
         let value = parseInt(input.value);
         const min = input.getAttribute('min') ? parseInt(input.getAttribute('min')) : 1;
@@ -144,28 +148,25 @@
             data: {
                 product_id: productId,
                 size: size,
-                quantity_change: input.value,
+                color: color,
+                quantity: input.value,
                 _token: '{{ csrf_token() }}',
             },
             success: function(response) {
                 if (response.status === 'success') {
                     var cart = response.cart;
                     console.log(cart);
-                    
-                    cart.forEach(function(product) {
-                        var _pid = product.product_id;
-                        var _size = product.size;
-                        var _price = product.product_price;
-                        var _qty = product.quantity;
-                        const unitPrice = parseFloat(_price.replace('Rs. ', ''));
-                        const totalPrice = unitPrice * _qty;
-                        // console.log(_pid, _size, _price, _qty, unitPrice, totalPrice);
-                        $("#" + _pid + '-' + _size + " .cart-item__tprice").html('Rs. ' +
-                            totalPrice);
-                        updateCartTotal(cart);
-                        updateCartCount(cart);
-                        $('.ccd--cart').load(location.href + ' .ccd--cart');
-                    })
+                    // Update individual item total price
+                    const $totalPriceElement = $(element)
+                        .closest('.cart-item')
+                        .find('.cart-item__tprice');
+
+
+                    $totalPriceElement.html(`Rs. ${response.item_total_price.toLocaleString()}`);
+
+                    updateCartTotal(cart);
+                    updateCartCount(cart);
+                    // $('.ccd--cart').load(location.href + ' .ccd--cart');
 
                 }
             },
@@ -179,11 +180,10 @@
     function updateCartTotal(cart) {
         let total = 0;
         cart.forEach(item => {
-            let itemTotal = parseFloat(item.product_price.replace('Rs. ', '').replace(',', '')) * parseInt(item
-                .quantity);
+            let itemTotal = parseFloat(item.product_price) * parseInt(item.quantity);
             total += itemTotal;
         });
-        $(".cart__total-price").html('Rs. ' + total.toFixed(2));
+        $(".cart__total-price").html('Rs. ' + total.toLocaleString());
     }
 
     function updateCartCount(cart) {

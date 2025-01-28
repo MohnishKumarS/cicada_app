@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function checkout(){
-        return 'success';
+        return view('payment.checkout');
     }
 
     public function account()

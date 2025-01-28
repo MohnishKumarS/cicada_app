@@ -26,9 +26,7 @@ class HomeController extends Controller
         return redirect('/');
     }
 
-    public function contactUs(){
-        return view('profile.contact');
-    }
+
 
 
 }
