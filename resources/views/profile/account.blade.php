@@ -29,23 +29,29 @@
 
                             </summary>
                             <div class="accordion__content">
-                                <p>You haven't placed any orders yet.</p>
-
+                               
+                                @if ($orders->count() > 0)
+                                
                                 <div class="ccd--orders">
                                     <ul class="order__lists">
+                                        @foreach ($orders as $order)
+                                        @php
+                                            $firstImage =  $order->orderDetails->first()->product->main_img;
+                                        @endphp
+                                        
                                         <li class="order__list">
-                                            <a href="{{ url('view-order') }}" class="order__list-link">
+                                            <a href="{{ route('view.order',$order->id) }}" class="order__list-link">
                                                 <div class="order__list-pic">
-                                                    <img src="images/b7.jpg" alt="product-image"
+                                                    <img src="{{asset('admin-files/products/'.$firstImage)}}" alt="product-image"
                                                         class="img-fluid order__list-img" width="100" height="100"
                                                         loading="lazy">
                                                 </div>
                                                 <div class="order__list-info">
                                                     <div class="order__list-title">
-                                                        OrderID : ccd_12345
+                                                        OrderID : {{$order->order_id}}
                                                     </div>
                                                     <div class="order__list-date">
-                                                        Placed on Jan 15, 2023
+                                                        Placed on {{ \Carbon\Carbon::parse($order->created_at)->format('M d, Y') }}
                                                     </div>
                                                     <div class="order__list-status">
                                                         <span class="badge text-bg-danger">
@@ -53,7 +59,7 @@
                                                         </span>
                                                     </div>
                                                     <div class="order__list-total">
-                                                        Rs. 1999
+                                                        Rs. {{$order->total_amount}}
                                                     </div>
                                                 </div>
                                                 <div class="order__list-icon">
@@ -61,64 +67,15 @@
                                                 </div>
                                             </a>
                                         </li>
-                                        <li class="order__list">
-                                            <a href="{{ url('view-order') }}" class="order__list-link">
-                                                <div class="order__list-pic">
-                                                    <img src="images/b6.jpg" alt="product-image"
-                                                        class="img-fluid order__list-img" width="100" height="100"
-                                                        loading="lazy">
-                                                </div>
-                                                <div class="order__list-info">
-                                                    <div class="order__list-title">
-                                                        OrderID : ccd_12345
-                                                    </div>
-                                                    <div class="order__list-date">
-                                                        Placed on Jan 15, 2023
-                                                    </div>
-                                                    <div class="order__list-status">
-                                                        <span class="badge text-bg-danger">
-                                                            Pending
-                                                        </span>
-                                                    </div>
-                                                    <div class="order__list-total">
-                                                        Rs. 1999
-                                                    </div>
-                                                </div>
-                                                <div class="order__list-icon">
-                                                    <i class="fa-solid fa-angle-right icon"></i>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="order__list">
-                                            <a href="{{ url('view-order') }}" class="order__list-link">
-                                                <div class="order__list-pic">
-                                                    <img src="images/b8.jpg" alt="product-image"
-                                                        class="img-fluid order__list-img" width="100" height="100"
-                                                        loading="lazy">
-                                                </div>
-                                                <div class="order__list-info">
-                                                    <div class="order__list-title">
-                                                        OrderID : ccd_12345
-                                                    </div>
-                                                    <div class="order__list-date">
-                                                        Placed on Jan 15, 2023
-                                                    </div>
-                                                    <div class="order__list-status">
-                                                        <span class="badge text-bg-success">
-                                                            delivered
-                                                        </span>
-                                                    </div>
-                                                    <div class="order__list-total">
-                                                        Rs. 1999
-                                                    </div>
-                                                </div>
-                                                <div class="order__list-icon">
-                                                    <i class="fa-solid fa-angle-right icon"></i>
-                                                </div>
-                                            </a>
-                                        </li>
+                                        @endforeach
+                                        
+                                        
                                     </ul>
                                 </div>
+                                @else
+                                <p>You haven't placed any orders yet.</p>
+                                @endif
+                              
 
                             </div>
                         </details>
@@ -188,7 +145,7 @@
                             <summary role="button" aria-expanded="false">
                                 <div class="summary__title">
                                     <span class="icon icon-accordion">
-                                        <i class="fa-solid fa-user-check"></i>
+                                        <i class="fa-solid fa-user-lock"></i>
                                     </span>
                                     <h2 class="h4 accordion__title inline-richtext">
                                         Change Password

@@ -3,6 +3,11 @@
 
 @section('content')
     <section>
+        @if ($finalCart->count() > 0)
+        @php
+        // Calculate the grand total (sum of all total prices)
+        $grandTotal = $finalCart->sum('total_price');
+    @endphp
         <div class="ccd-checkout">
             <div class="container">
                 <h1 class="page--head text-center animate__animated animate__bounce animate__delay-2s">Checkout</h1>
@@ -66,7 +71,7 @@
                                 <div class="col-lg-6">
                                     <div class="ccd-form-group">
                                         <label for="pincode" class="form-label">Pincode *</label>
-                                        <input type="text" class="form-control" id="pincode" name="pincode" value="{{ old('pincode') }}" required>
+                                        <input type="text" class="form-control" id="pincode" name="pincode" value="{{ old('pincode') }}" maxlength="6" required>
                                         @error('pincode')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -88,12 +93,25 @@
                                 <div class="col-lg-6">
                                     <div class="ccd-form-group">
                                         <label for="mobile" class="form-label">Mobile *</label>
-                                        <input type="text" class="form-control" id="mobile" name="mobile" value="{{ old('mobile') }}" required>
+                                        <input type="text" class="form-control" id="mobile" name="mobile" value="{{ old('mobile') }}" maxlength="10" required>
                                         @error('mobile')
                                         <span class="text-danger">
                                             {{ $message }}
                                         </span>
                                     @enderror
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="ccd-form-group">
+
+                                        <label for="message" class="form-label">Additional Note</label>
+                                        <textarea class="form-control" id="message" rows="2" name="message">{{ old('message') }}</textarea>
+                                        @error('message')
+                                        <span class="text-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+
                                     </div>
                                 </div>
 
@@ -145,7 +163,7 @@
                                                                 alt="bank-card-front-side" />
                                                         </div>
                                                         <div class="mt-3">
-                                                            <button type="submit" name="pay_method" value="online" class="btn-sec">Pay now</button>
+                                                            <button type="submit" name="pay_method" value="online" class="btn-sec">Pay ₹{{ number_format($grandTotal, 2) }}</button>
                                                         </div>
                                                     </div>
 
@@ -179,7 +197,7 @@
                                             <div class="accordion__content">
                                                 <div class="profile__block">
                                                     <div class="py-3 text-center">
-                                                        <p>Total Price: 449.00</p>
+                                                        <p>Total Price: Rs.{{ number_format($grandTotal, 2) }}</p>
                                                         <button type="submit" name="pay_method" value="cod" class="btn-sec">Place Order</button>
                                                     </div>
                                                 </div>
@@ -196,6 +214,19 @@
             </div>
 
         </div>
+        @else
+        <div class="ccd--empty">
+            <div class="ccd-empty__icon">
+                <img src="{{ asset('images/cicada.webp') }}" class="img-fluid ccd-empty__logo" width="100" height="100"
+                    alt="cicada-logo">
+            </div>
+            <h3 class="ccd-empty__title page--head">Your cart is currently empty.</h3>
+            <div class="ccd-empty__link">
+                <a href="{{ url('collections') }}" class="btn-main">Return to Shop</a>
+            </div>
+        </div>
+        @endif
+        
     </section>
 
 

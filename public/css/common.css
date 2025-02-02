@@ -724,3 +724,36 @@ label {
         transform: translate(0, 0);
     }
 }
+
+        /* swiper paginate */
+        .swiper-pagination-bullet{
+            position: relative;
+            width: 1.8rem;
+            height: 1.8rem;
+            background: transparent;
+            margin: 0 !important;
+        }
+        .swiper-pagination-bullet:after, .swiper-pagination-bullet::before{
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            transition: all 0.4s ease;
+        }
+        .swiper-pagination-bullet::before{
+            border: 1px solid #fff;
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        .swiper-pagination-bullet:after{
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            background: #fff;
+            opacity: 0.4;
+            margin: auto;
+        }
+        .swiper-pagination-bullet-active::after, .swiper-pagination-bullet-active:before{
+            opacity: 1;
+            transform: scale(1);
+        }

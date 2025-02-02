@@ -67,14 +67,19 @@ Route::get('/brand/{slug}', [CollectionController::class, 'brandProducts'])->nam
 ## authenticate routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/account', [UserController::class, 'account'])->name('account');
-    Route::get('/view-order', [UserController::class, 'viewOrder']);
+    Route::get('/view-order/{id}', [UserController::class, 'viewOrder'])->name('view.order');
     Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('profile.update');
     Route::post('/update-password', [UserController::class, 'updatePassword']);
 
 
-    Route::get('/checkout', [UserController::class, 'checkout']);
+    Route::get('/checkout', [UserController::class, 'checkout'])->name('checkout');
     Route::post('/submit-order', [OrderController::class, 'submitOrder'])->name('submitOrder');
 
+    // phonepe integration
+    Route::get('/payment-method', [OrderController::class, 'makePhonePePayment'])->name('phonepe.payment');
+    Route::post('/payment/callback', [OrderController::class, 'phonePeCallback'])->name('phonepe.payment.callback');
+    Route::post('/payment-refund', [OrderController::class, 'phonePeRefundAPI'])->name('phonepe.payment.refund');
+    Route::get('/payment/success',[OrderController::class,'paymentSuccess'])->name('payment.success');
 
 
 });
@@ -145,6 +150,11 @@ Route::get('/clear', function() {
     return "Cleared!";
  
  });
+
+ Route::fallback(function () {
+    return view('errors.404');
+ });
+ 
 
 
 

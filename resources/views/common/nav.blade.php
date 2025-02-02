@@ -5,7 +5,7 @@
                 <nav>
                     <ul class="ccd-nav__items">
                         <li class="ccd-nav__item">
-                            <a class="ccd-nav__link menu--link" data-bs-toggle="offcanvas" href="#header-menu--slider">
+                            <a class="ccd-nav__link menu--link" data-bs-toggle="offcanvas" href="#header-menu--slider" aria-label="Open Navigation Menu">
                                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
                                     class="menu--icon icon icon-hamburger" fill="none" viewBox="0 0 18 16">
                                     <path
@@ -22,7 +22,7 @@
                             </a>
                         </li>
                         <li class="ccd-nav__item">
-                            <a href="{{route('account')}}" class="ccd-nav__link menu--link">
+                            <a href="{{route('account')}}" class="ccd-nav__link menu--link" aria-label="Open user account">
                                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
                                     class="menu--icon icon icon-account" fill="none" viewBox="0 0 18 19">
                                     <path fill-rule="evenodd" clip-rule="evenodd"

@@ -51,9 +51,9 @@
     // Check if the element with ID 'productSwiper' exists
 if (document.querySelector('#productSwiper')) {
     const swiper = new Swiper('#productSwiper', {
-        autoplay: {
-            delay: 5000,
-        },
+        // autoplay: {
+        //     delay: 5000,
+        // },
         slidesPerView: 4,
         slidesPerGroup: 4,
         effect: "none",

@@ -120,7 +120,7 @@
                             <div class="product__actions">
                                 <button class="btn-main product__btn" onclick="addToCart({{ $product->id }})">Add to
                                     Cart</button>
-                                <button class="btn-sec product__btn">Buy it Now</button>
+                                <a href="{{route('checkout')}}" class="btn-sec product__btn">Buy it Now</a>
                             </div>
 
                             <div class="product__desc">
@@ -306,9 +306,9 @@
                                 </div>
                             </div>
                             <div class="product-links">
-                                <a href="{{ url('cart') }}" class="btn-sec">View Cart</a>
-                                <a href="" class="btn-main">Check out</a>
-                                <a href="{{ url('/') }}" class="link--text text-center">Continue shopping</a>
+                                <a href="{{ route('cart.show') }}" class="btn-sec">View Cart</a>
+                                <a href="{{route('checkout')}}" class="btn-main">Check out</a>
+                                <a href="{{ route('collections') }}" class="link--text text-center">Continue shopping</a>
                             </div>
                         </div>
                     </div>
@@ -331,10 +331,10 @@
                                             class="ccd-card__img" alt="{{ $pro->slug }}" loading="lazy">
                                     </div>
                                     <div class="ccd-card__content">
-                                        <h4 class="ccd-card__title">
+                                        <h3 class="ccd-card__title">
                                             <a href="{{ route('product.show', ['slug' => $pro->slug]) }}"
                                                 class="link link--hover">{{ $pro->product_name }}</a>
-                                        </h4>
+                                        </h3>
                                         <p class="ccd-card__info">
                                             <span class="ccd-card__org">Rs {{ $pro->actual_price }}</span>
                                             <span class="ccd-card__sell">Rs {{ $pro->offer_price }}</span>

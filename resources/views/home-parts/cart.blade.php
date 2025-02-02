@@ -47,9 +47,10 @@
                                         // $groupTotalPrice = $product->offer_price * $totalQuantity;
                                         // $grandTotal += $groupTotalPrice; // Add to the grand total
                                     @endphp
-                                    
+
                                     @if ($product)
-                                        <tr class="cart-item" id="{{ $cartItem['product_id'] }}-{{ $cartItem['size'] }}-{{ $cartItem['color'] }}">
+                                        <tr class="cart-item"
+                                            id="{{ $cartItem['product_id'] }}-{{ $cartItem['size'] }}-{{ $cartItem['color'] }}">
                                             <td class="cart-item__media">
                                                 <div class="cart-item__pic">
                                                     <img src="{{ asset('admin-files/products/' . $product->main_img) }}"
@@ -173,7 +174,7 @@
             @else
                 <div class="ccd--empty">
                     <div class="ccd-empty__icon">
-                        <img src="images/cicada.webp" class="img-fluid ccd-empty__logo" width="100" height="100"
+                        <img src="{{ asset('images/cicada.webp') }}" class="img-fluid ccd-empty__logo" width="100" height="100"
                             alt="cicada-logo">
                     </div>
                     <h3 class="ccd-empty__title page--head">Your cart is currently empty.</h3>

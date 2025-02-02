@@ -26,8 +26,8 @@ class BrandController extends Controller
         $request->validate([
             'brand_name' => 'required|string|max:255',
             'slug' => 'nullable|string|unique:brands,slug',
-            'brand_icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'brand_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'brand_icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg,web|max:2048',
+            'brand_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,web|max:2048',
         ]);
 
         $brands = new Brands();
@@ -90,8 +90,8 @@ class BrandController extends Controller
         $request->validate([
             'brand_name' => 'required|string|max:255',
             'slug' => 'nullable|string|unique:brands,slug,' . $id, // unique except for this brand
-            'brand_icon' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'brand_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'brand_icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
+            'brand_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
         ]);
 
         $brand = Brands::findOrFail($id);

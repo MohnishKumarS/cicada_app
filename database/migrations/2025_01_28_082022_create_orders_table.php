@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('pincode');
             $table->string('state');
             $table->string('mobile');
-            $table->string('message')->nullable();
+            $table->text('message')->nullable();
             $table->string('payment_method'); // 'cod' or 'online'
             $table->string('payment_id')->nullable(); 
             $table->integer('total_amount');

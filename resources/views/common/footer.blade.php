@@ -10,13 +10,13 @@
                                     {{-- <img src="{{asset('images/logo.avif')}}" alt="cicada-logo"> --}}
                                     CICADA
                                 </h2>
-                                <ul class="footer-block_content">
+                                <div class="footer-block_content">
                                     <p>"cicada" is a streetwear-based fashion house, born from bold creativity and a
                                         passion for pushing limits. We are rewriting the rules of streetwear. Embrace
                                         the fusion of construction, artistry, and fearless attitude in every stitch.</p>
-                                </ul>
+                                </div>
                             </div>
-                            <div class="col-6  col-lg-3 ps-4 ps-sm-0 mt-3 mt-sm-0 ps-lg-4">
+                            {{-- <div class="col-6  col-lg-3 ps-4 ps-sm-0 mt-3 mt-sm-0 ps-lg-4">
                                 <h2 class="footer-block_head">Quick links</h2>
                                 <ul class="footer-block_content">
                                     <li><a href="{{ route('homePage') }}" class="link link--hover">Home</a></li>
@@ -27,7 +27,7 @@
                                     <li><a href="{{ route('login') }}" class="link link--hover">Login</a></li>
                                     @endguest
                                 </ul>
-                            </div>
+                            </div> --}}
                             <div class="col-6  col-lg-3 ps-4 ps-sm-0 mt-3 mt-sm-0 ">
                                 <h2 class="footer-block_head">More Info</h2>
                                 <ul class="footer-block_content">
@@ -36,9 +36,14 @@
                                     <li><a href="{{route('policy.privacy')}}" class="link link--hover">Privacy Policy</a></li>
                                     <li><a href="{{route('policy.shipping')}}" class="link link--hover">Shipping & return Policy</a></li>
                                     <li><a href="{{route('policy.terms')}}" class="link link--hover">Terms & conditions</a></li>
-                                    <li>
-
-                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-6  col-lg-3 ps-4 ps-sm-0 mt-3 mt-sm-0 ">
+                                <h2 class="footer-block_head">Social links</h2>
+                                <ul class="footer-block_content social-items">
+                                    <li><a href="" class="link link--hover" aria-label="Open whatsapp account"><i class="fa-brands fa-whatsapp"></i></a></li>
+                                    <li><a href="https://www.instagram.com/thestore_cicada?igsh=MXF1ZjRjZTI0ZGZpbQ%3D%3D&utm_source=qr" target="_blank" class="link link--hover" aria-label="Open instagram account"><i class="fa-brands fa-instagram"></i></a></li>
+                                    <li><a href="" class="link link--hover" aria-label="Open facebook account"><i class="fa-brands fa-facebook-f"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -50,3 +55,4 @@
             </div>
         </div>
     </footer>
+

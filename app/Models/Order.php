@@ -12,15 +12,24 @@ class Order extends Model
     protected $guarded = [];
 
     public static function generateOrderId()
-{
-    // Get the latest order
-    $lastOrder = Order::latest('id')->first();
+    {
+        // Get the latest order
+        $lastOrder = Order::latest('id')->first();
 
-    // Extract numeric part from the last order_id
-    $lastOrderId = $lastOrder ? intval(str_replace('cicada_', '', $lastOrder->order_id)) : 1000;
+        // Extract numeric part from the last order_id
+        $lastOrderId = $lastOrder ? intval(str_replace('cicada_', '', $lastOrder->order_id)) : 1000;
 
-    // Increment and format the new order_id
-    return 'cicada_' . ($lastOrderId + 1);
-}
+        // Increment and format the new order_id
+        return 'cicada_' . ($lastOrderId + 1);
+    }
 
+    public function orderDetails()
+    {
+        return $this->hasMany(Orderdetail::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

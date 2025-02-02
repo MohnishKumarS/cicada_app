@@ -106,12 +106,12 @@
                                     alt="{{ $product->slug }}" loading="lazy">
                             </div>
                             <div class="ccd-card__content">
-                                <h4 class="ccd-card__title">
+                                <h3 class="ccd-card__title">
                                     <a href="{{ route('product.show', ['slug' => $product->slug]) }}"
                                         class="link link--hover">
                                         {{ $product->product_name }}
                                     </a>
-                                </h4>
+                                </h3>
                                 <p class="ccd-card__info">
                                     <span class="ccd-card__org">Rs {{ $product->actual_price }}</span>
                                     <span class="ccd-card__sell">Rs {{ $product->offer_price }}</span>
@@ -124,7 +124,7 @@
             </div>
             {{-- "See more" button --}}
             <div class="ccd-card__link text-center">
-                <a href="{{ route('collections') }}" class="btn-main">See more</a>
+                <a href="{{ route('collections') }}" class="btn-main">Explore Now</a>
             </div>
 
 
@@ -132,7 +132,7 @@
     </section>
 
     {{-- category and its products --}}
-    <section>
+    {{-- <section>
         <div class="container page--width">
             @foreach ($category_products as $category)
                 <h2 class="page--title text-capitalize">{{ $category->category_name }}</h2>
@@ -145,12 +145,12 @@
                                         class="ccd-card__img" alt="{{ $product->product_name }}" loading="lazy">
                                 </div>
                                 <div class="ccd-card__content">
-                                    <h4 class="ccd-card__title">
+                                    <h3 class="ccd-card__title">
                                         <a href="{{ route('product.show', ['slug' => $product->slug]) }}"
                                             class="link link--hover">
                                             {{ $product->product_name }}
                                         </a>
-                                    </h4>
+                                    </h3>
                                     <p class="ccd-card__info">
                                         <span class="ccd-card__org">Rs {{ $product->actual_price }}</span>
                                         <span class="ccd-card__sell">Rs {{ $product->offer_price }}</span>
@@ -161,7 +161,7 @@
                     @endforeach
 
                 </div>
-                {{-- "See more" button --}}
+
                 @if ($category->product->count() > 0)
                     <div class="ccd-card__link text-center">
                         <a href="{{ route('category.show', ['slug' => $category->slug]) }}" class="btn-main">See more</a>
@@ -169,7 +169,7 @@
                 @endif
             @endforeach
         </div>
-    </section>
+    </section> --}}
     {{-- @php
     use Illuminate\Support\Facades\Artisan;
            Artisan::call('cache:clear');
@@ -185,7 +185,7 @@
         const swiperBanner = new Swiper('#banner__swiper-mob', {
             "autoplay": {
                 "delay": 5000
-            },
+            }, 
             "slidesPerView": 4,
             "slidesPerGroup": 4,
             "effect": "none",
