@@ -17,7 +17,9 @@
                                             width="150" height="150" loading="lazy">
                                     </li>
                                     @php
-                                        $other_img = empty($product->additional_images) ? [] : explode(',', $product->additional_images);
+                                        $other_img = empty($product->additional_images)
+                                            ? []
+                                            : explode(',', $product->additional_images);
                                     @endphp
                                     @if (count($other_img))
                                         @foreach ($other_img as $img)
@@ -91,22 +93,24 @@
                                         </div>
                                     </div>
                                 @endif
+                                @if ($product->size)
+                                    <p class="product__sub-cat">Size*</p>
+                                    <div class="product__size">
+                                        <div class="size-selector">
+                                            @php
+                                                $sizes = explode(',', $product->size);
+                                            @endphp
+                                            @foreach ($sizes as $size)
+                                                <input class="size-input" type="radio" name="size"
+                                                    id="size-{{ strtolower($size) }}" value="{{ strtolower($size) }}">
+                                                <label for="size-{{ strtolower($size) }}"
+                                                    class="size-label">{{ strtoupper($size) }}</label>
+                                            @endforeach
 
-                                <p class="product__sub-cat">Size*</p>
-                                <div class="product__size">
-                                    <div class="size-selector">
-                                        @php
-                                            $sizes = explode(',', $product->size);
-                                        @endphp
-                                        @foreach ($sizes as $size)
-                                            <input class="size-input" type="radio" name="size"
-                                                id="size-{{ strtolower($size) }}" value="{{ strtolower($size) }}">
-                                            <label for="size-{{ strtolower($size) }}"
-                                                class="size-label">{{ strtoupper($size) }}</label>
-                                        @endforeach
-
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
+
                                 <p class="product__sub-cat">Quantity*</p>
                                 <div class="product__quatity">
                                     <div class="input-group input-group-lg" style="width: 140px;">
@@ -120,7 +124,8 @@
                             <div class="product__actions">
                                 <button class="btn-main product__btn" onclick="addToCart({{ $product->id }})">Add to
                                     Cart</button>
-                                <a href="{{route('checkout')}}" class="btn-sec product__btn">Buy it Now</a>
+                                <button class="btn-sec product__btn" onclick="buyNow({{ $product->id }})">Buy it
+                                    Now</button>
                             </div>
 
                             <div class="product__desc">
@@ -307,7 +312,7 @@
                             </div>
                             <div class="product-links">
                                 <a href="{{ route('cart.show') }}" class="btn-sec">View Cart</a>
-                                <a href="{{route('checkout')}}" class="btn-main">Check out</a>
+                                <a href="{{ route('checkout') }}" class="btn-main">Check out</a>
                                 <a href="{{ route('collections') }}" class="link--text text-center">Continue shopping</a>
                             </div>
                         </div>
@@ -345,7 +350,7 @@
                         @endforeach
                     </div>
                     <div class="ccd-card__link text-center">
-                        <a href="{{route('collections')}}" class="btn-main">See more</a>
+                        <a href="{{ route('collections') }}" class="btn-main">See more</a>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@
                 </div>
                 <h3 class="ccd-empty__title page--head">Hooray! PAGE NOT FOUND</h3>
                 <div class="ccd-empty__link">
-                    <a href="{{ url('/') }}" class="btn-main">Back to Home</a>
+                    <a href="{{ url('/') }}" class="btn-sec">Back to Home</a>
                 </div>
             </div>
         </div>

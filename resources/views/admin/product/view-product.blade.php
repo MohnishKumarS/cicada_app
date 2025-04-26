@@ -27,7 +27,7 @@
                   <thead>
                     <tr>
                       <th>S.No.</th> 
-                      <th>Product Id</th>
+                      {{-- <th>Product Id</th> --}}
                       <th>Product Name</th>
                       <th>Brand Name</th>
                       <th>Category Name</th>
@@ -49,7 +49,7 @@
                    @php $sno++ @endphp
                     <tr id="product-row-{{ $product->id }}">
                       <td>{{ $sno }}</td> 
-                        <td>{{ $product->id }}</td> 
+                        {{-- <td>{{ $product->id }}</td>  --}}
                         <td>{{ $product->product_name }}</td>
                         <td>{{ $product->brand ? $product->brand->brand_name : '-' }}</td> 
                         <td>{{ $product->category ? $product->category->category_name : '-' }}</td> 

@@ -392,10 +392,6 @@
                 position: initial !important;
                 padding: var(--ccd-base-size) 0;
             }
-
-            & .swiper-pagination-bullet-active {
-                background: var(--ccd-color-primary) !important;
-            }
         }
     }
 

@@ -12,21 +12,11 @@
                         <a href="{{ url('/') }}" class="link--text">Continue shopping</a>
                     </div>
 
-                    {{-- @php
-                        print_r($validCartItems);
-                        echo '<br> ---- Grouped array ------- <br>';
-                        // Group cart items by product_id and size
-                        $groupedCartItems = collect($validCartItems)->groupBy(function ($item) {
-                            return $item['product_id'] . '_' . $item['size'];
-                        });
-                        $grandTotal = 0;
-                        // print_r($groupedCartItems);
-                    @endphp --}}
                     {{-- {{$groupedCartItems}} --}}
                     @if (count($finalCart) > 0)
                         @php
                             // Calculate the grand total (sum of all total prices)
-                            $grandTotal = $finalCart->sum('total_price');
+                            $grandTotal = collect($finalCart)->sum('total_price');
                         @endphp
                         <table class="cart-table">
                             <thead>
@@ -66,7 +56,10 @@
                                                     </div>
                                                     <div class="cart-item__price">Rs.
                                                         {{ number_format($product->offer_price, 2) }}</div>
-                                                    <div class="cart-item__size">Size: {{ $cartItem['size'] }}</div>
+                                                    @if ($cartItem['size'])
+                                                        <div class="cart-item__size">Size: {{ $cartItem['size'] }}</div>
+                                                    @endif
+
                                                     @if ($cartItem['color'])
                                                         <div class="cart-item__color">Color: {{ $cartItem['color'] }}</div>
                                                     @endif
@@ -174,8 +167,8 @@
             @else
                 <div class="ccd--empty">
                     <div class="ccd-empty__icon">
-                        <img src="{{ asset('images/cicada.webp') }}" class="img-fluid ccd-empty__logo" width="100" height="100"
-                            alt="cicada-logo">
+                        <img src="{{ asset('images/cicada.webp') }}" class="img-fluid ccd-empty__logo" width="100"
+                            height="100" alt="cicada-logo">
                     </div>
                     <h3 class="ccd-empty__title page--head">Your cart is currently empty.</h3>
                     <div class="ccd-empty__link">

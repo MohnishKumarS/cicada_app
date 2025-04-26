@@ -132,6 +132,24 @@
                             </div>
                         </li>
                         <li class="nav-item">
+                            <a data-bs-toggle="collapse" href="#orders_list">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Orders</p>
+                                <span class="caret"></span>
+                            </a>
+                      
+                            <div class="collapse" id="orders_list">
+                                <ul class="nav nav-collapse" style="list-style: none">
+                                    <li>
+                                        <a href="{{ route('all.orders') }}">
+                                            <span class="ms-5">All Order</span>
+                                        </a>
+                                    </li>                                 
+                                  
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#register_list">
                                 <i class="fas fa-layer-group"></i>
                                 <p>Registration</p>

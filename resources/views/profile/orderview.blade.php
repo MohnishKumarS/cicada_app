@@ -11,7 +11,31 @@
                     <div class="ccd-ov-head">
                         <div>Order ID - {{ $order->order_id }}</div>
                         <div class="ccd-ov-status">
-                            <span class="badge bg-success">Completed</span>
+                            @switch($order->status)
+                                @case(0)
+                                    <span class="badge text-bg-primary">Pending</span>
+                                @break
+
+                                @case(1)
+                                    <span class="badge text-bg-info">Shipped</span>
+                                @break
+
+                                @case(2)
+                                    <span class="badge text-bg-warning">Out for Delivery</span>
+                                @break
+
+                                @case(3)
+                                    <span class="badge text-bg-success">Delivered</span>
+                                @break
+
+                                @case(4)
+                                    <span class="badge text-bg-danger">Canceled</span>
+                                @break
+
+                                @default
+                                    <span class="badge text-bg-secondary">Unknown</span>
+                            @endswitch
+
                         </div>
                         <div class="ccd-ov-date">Placed on {{ \Carbon\Carbon::parse($order->created_at)->format('M d, Y') }}
                         </div>
@@ -31,7 +55,8 @@
                                             @if ($orderD->count())
                                                 @foreach ($orderD as $val)
                                                     <li class="order__list">
-                                                        <a href="{{route('product.show',$val->product->slug)}}" class="order__list-link">
+                                                        <a href="{{ route('product.show', $val->product->slug) }}"
+                                                            class="order__list-link">
                                                             <div class="order__list-pic">
                                                                 <img src="{{ asset('admin-files/products/' . $val->product->main_img) }}"
                                                                     alt="product-image" class="img-fluid order__list-img"
@@ -74,7 +99,7 @@
                                         @if ($order->payment_method == 'cod')
                                             <p>Cash on Delivery</p>
                                         @else
-                                            <p>Online UPI</p>
+                                            <p>{{$order->payment_method}}</p>
                                         @endif
 
                                     </div>

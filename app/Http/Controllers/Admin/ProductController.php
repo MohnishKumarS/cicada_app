@@ -29,7 +29,7 @@ class ProductController extends Controller
             'product_name' => 'required|string|max:255',
             'slug' => 'nullable|string|unique:products,slug',
             'product_description' => 'nullable|string',
-            'sizes' => 'required|array',
+            'sizes' => 'nullable|array',
             'sizes.*' => 'in:s,m,l,xl,xxl',
             'quantity' => 'required|integer|min:1',
             'actual_price' => 'required|integer|min:0',
@@ -49,14 +49,14 @@ class ProductController extends Controller
         $product->slug = Str::slug($slug);
 
         $product->product_description = $request->input('product_description');
-        $product->size = implode(',', $request->input('sizes'));
+        $product->size = is_array($request->input('sizes')) ? implode(',', $request->input('sizes')) : null;
         $product->quantity = $request->input('quantity');
         $product->actual_price = $request->input('actual_price');
         $product->offer_price = $request->input('offer_price');
         $product->brand_id = $request->input('brand_id');
         $product->category_id = $request->input('category_id');
         $product->trending = $request->input('trending');
-        $product->color = $request->input('colors');
+        $product->color = $request->input('colors') ?: null;
         $product->status = 1;
 
 
@@ -91,15 +91,14 @@ class ProductController extends Controller
 
     public function view()
     {
-        $products = Product::all();
+        $products = Product::latest()->get();
         // dd($products);
         return view('admin.product.view-product', compact('products'));
     }
 
     public function edit($id)
     {
-        $product = Product::findOrFail
-        ($id);
+        $product = Product::findOrFail($id);
         $brand = Brands::where('brand_status', 1)->get();
         $category = Category::where('status', 1)->get();
         return view('admin.product.edit-product', compact('product', 'brand', 'category'));
@@ -110,16 +109,16 @@ class ProductController extends Controller
         $request->validate([
             'product_name' => ['required', 'string', 'max:255'],
             'slug' => 'nullable|string|unique:products,slug,' . $id,
-            'product_description' => ['required', 'string'],
-            'sizes' => 'required|array',
+            'product_description' => ['nullable', 'string'],
+            'sizes' => 'nullable|array',
             'sizes.*' => 'in:s,m,l,xl,xxl',
             'quantity' => 'required|integer|min:1',
-            'actual_price' => 'required|integer|min:0',
-            'offer_price' => 'nullable|integer|min:0',
-            'brand_id' => 'nullable|exists:brands,id',
+            'actual_price' => 'required|integer|min:1',
+            'offer_price' => 'nullable|integer|min:1',
+            'brand_id' => 'required|exists:brands,id',
             'category_id' => 'required|exists:categories,id',
             'trending' => 'required|in:1,2',
-            'colors' => ['required','string'],
+            'colors' => ['nullable','string'],
             
         ]);
 
@@ -131,7 +130,7 @@ class ProductController extends Controller
         $product->slug = Str::slug($slug);
 
         $product->product_description = $request->input('product_description');
-        $product->size = implode(',', $request->input('sizes'));
+        $product->size = is_array($request->input('sizes')) ? implode(',', $request->input('sizes')) : null;
         $product->quantity = $request->input('quantity');
         $product->actual_price = $request->input('actual_price');
         $product->offer_price = $request->input('offer_price');

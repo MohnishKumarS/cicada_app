@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Home\CollectionController;
 use App\Http\Controllers\Home\ViewProductController;
 
@@ -27,9 +28,6 @@ use App\Http\Controllers\Home\ViewProductController;
 |
 */
 
-// Route::get('/view-order', function () {
-//     return 'sadas';
-// });
 ## featured products
 Route::get('/', [ViewProductController::class, 'homePage'])->name('homePage');
 Route::get('/productbuy/{slug}', [ViewProductController::class, 'show'])->name('product.show');
@@ -64,12 +62,17 @@ Route::get('/collections', [CollectionController::class, 'index'])->name('collec
 Route::get('shop/{slug}', [CollectionController::class, 'show'])->name('category.show');
 Route::get('/brand/{slug}', [CollectionController::class, 'brandProducts'])->name('brandproducts');
 
+## BuyNow
+Route::post('/buy-it-now',[UserController::class,'buyNow'])->name('buyNow');
+
 ## authenticate routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/account', [UserController::class, 'account'])->name('account');
     Route::get('/view-order/{id}', [UserController::class, 'viewOrder'])->name('view.order');
     Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('profile.update');
     Route::post('/update-password', [UserController::class, 'updatePassword']);
+    Route::post('/order-track',[UserController::class,'trackOrder'])->name('order.track');
+    Route::get('/order-tracking/{id}',[UserController::class,'trackOrderStatus'])->name('order.trackStatus');
 
 
     Route::get('/checkout', [UserController::class, 'checkout'])->name('checkout');
@@ -135,19 +138,32 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::post('update/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::delete('delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
     });
+
+    Route::prefix('order')->group(function(){
+        Route::get('all-order', [OrdersController::class, 'view'])->name('all.orders');
+        Route::get('view/{id}', [OrdersController::class, 'viewOrderDetails']);
+        Route::put('order-status/{id}', [OrdersController::class, 'updateOrderStatus']);
+        // Route::post('order-cancel/{id}', [OrderController::class, 'cancelOrder']);
+        // Route::post('order-return/{id}', [OrderController::class,'returnOrder']);
+        // Route::post('order-refund/{id}', [OrderController::class,'refundOrder']);
+        // Route::post('order-return-request/{id}', [OrderController::class,'returnRequest']);
+        // Route::get('order-return-request/{id}', [OrderController::class, 'viewReturnRequest']);
+        // Route::post('order-return-request-accept/{id}', [OrderController::class, 'acceptReturnRequest']);
+    });
 });
 
 
 ## cache clear
 Route::get('/clear', function() {
    
+    Artisan::call('route:clear');
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
-    Artisan::call('config:cache');
     Artisan::call('view:clear');
+    Artisan::call('config:cache');
     // Artisan::call('optimize');
  
-    return "Cleared!";
+    return "All caches cleared successfully!..!";
  
  });
 

@@ -105,7 +105,7 @@ class BrandController extends Controller
             }
             $iconFile = $request->file('brand_icon');
             $iconName = time() . '.' . $iconFile->getClientOriginalExtension();
-            $iconFile->move(public_path('admin-files/brands/brand-icon'), $iconName);
+            $iconFile->move('admin-files/brands/brand-icon', $iconName);
             $brand->brand_icon = $iconName;
         }
 
@@ -115,7 +115,7 @@ class BrandController extends Controller
             }
             $imageFile = $request->file('brand_image');
             $imgName = time() . '.' . $imageFile->getClientOriginalExtension();
-            $imageFile->move(public_path('admin-files/brands/brand-img'), $imgName);
+            $imageFile->move('admin-files/brands/brand-img', $imgName);
             $brand->brand_img = $imgName;
         }
 

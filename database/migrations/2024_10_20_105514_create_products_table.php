@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('slug');
             $table->text('product_description')->nullable();
-            $table->string('size');
+            $table->string('size')->nullable();
             $table->integer('quantity');
             $table->enum('gender', ['male', 'female', 'unisex'])->nullable();
             $table->integer('actual_price');

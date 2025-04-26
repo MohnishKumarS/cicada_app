@@ -54,9 +54,22 @@
                                                         Placed on {{ \Carbon\Carbon::parse($order->created_at)->format('M d, Y') }}
                                                     </div>
                                                     <div class="order__list-status">
-                                                        <span class="badge text-bg-danger">
-                                                            Pending
+                                                        @php
+                                                        $statusLabels = [
+                                                            '0' => ['class' => 'text-bg-primary', 'label' => 'Pending'],
+                                                            '1' => ['class' => 'text-bg-info', 'label' => 'Shipped'],
+                                                            '2' => ['class' => 'text-bg-warning', 'label' => 'Out for Delivery'],
+                                                            '3' => ['class' => 'text-bg-success', 'label' => 'Delivered'],
+                                                            '4' => ['class' => 'text-bg-danger', 'label' => 'Canceled'],
+                                                        ];
+                                                    @endphp
+                                                    
+                                                    @if (isset($statusLabels[$order->status]))
+                                                        <span class="badge {{ $statusLabels[$order->status]['class'] }}">
+                                                            {{ $statusLabels[$order->status]['label'] }}
                                                         </span>
+                                                    @endif
+                                                       
                                                     </div>
                                                     <div class="order__list-total">
                                                         Rs. {{$order->total_amount}}
@@ -219,23 +232,26 @@
                             <div class="accordion__content">
                                 <div class="row justify-content-center px-3 px-sm-0">
                                     <div class="col-lg-6 col-md-10 col-12">
-                                        <div>
-
-                                            <div class="form-floating mb-4">
-                                                <input type="text" class="form-control" id="floatingInput"
-                                                    placeholder="name@example.com" value="78997">
-                                                <label for="floatingInput">Order ID</label>
+                                        <form action="{{route('order.track')}}" method="post">
+                                            @csrf
+                                            <div>
+                                                <div class="form-floating mb-4">
+                                                    <input type="text" class="form-control" id="orderId" name="orderID"
+                                                        placeholder="name@example.com" required>
+                                                    <label for="orderId">Order ID</label>
+                                                </div>
+                                                {{-- <div class="form-floating mb-4">
+                                                    <input type="text" class="form-control" id="mobile" name="mobile"
+                                                        placeholder="name@example.com" >
+                                                    <label for="mobile">Mobile Number</label>
+                                                </div> --}}
+    
+                                                <div class="custom-acc__btns my-4 text-center">
+                                                    <button class="btn-main" type="submit">Search Order</button>
+                                                </div>
                                             </div>
-                                            <div class="form-floating mb-4">
-                                                <input type="text" class="form-control" id="floatingInput"
-                                                    placeholder="name@example.com" value="56756756">
-                                                <label for="floatingInput">Mobile Number</label>
-                                            </div>
-
-                                            <div class="custom-acc__btns my-4 text-center">
-                                                <button class="btn-main">Search Order</button>
-                                            </div>
-                                        </div>
+                                        </form>
+                                        
                                     </div>
                                 </div>
 

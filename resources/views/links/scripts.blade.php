@@ -26,21 +26,87 @@
 <script>
     updateCartCount();
 
-    function addToCart(productId) {
+    function buyNow(productId) {
+        const sizeInputExists = $('input[name="size"]').length > 0; // Check if size inputs exist
         const size = $('input[name="size"]:checked').val();
         const colorInputExists = $('input[name="color"]').length > 0; // Check if color inputs exist
         const color = $('input[name="color"]:checked').val();
         const quantity = $('#quantity').val();
 
-        if (!size) {
+
+        if (colorInputExists && !color) {
+            $.Toast("Hooray!", "Please select a color", "error", {
+                timeout: 6000,
+                has_progress: true,
+            });
+            return;
+        }
+        if (sizeInputExists && !size) {
             $.Toast("Oops!", "Please select a size", "error", {
                 timeout: 6000,
                 has_progress: true,
             });
             return;
         }
+
+        const productDetails = {
+            product_id: productId,
+            size: size,
+            color: color,
+            quantity: parseInt(quantity),
+            product_name: $('.product__title').text(),
+            product_price: $('.price-sell').text().trim().replace(/[^\d]/g, ''),
+            product_image: $('#productImage').attr('src')
+        };
+
+        $.ajax({
+            url: '/buy-it-now',
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                product_id: productDetails.product_id,
+                size: productDetails.size,
+                color: productDetails.color,
+                quantity: productDetails.quantity,
+                product_name: productDetails.product_name,
+                product_price: productDetails.product_price,
+                product_image: productDetails.product_image
+            },
+            success: function(res) {
+                console.log(res);
+                if (res.status == 'success') {
+                    window.location.href = "/checkout";
+                } else {
+                    $.Toast("Oops!", "Please login to continue", "error", {
+                        timeout: 6000,
+                        has_progress: true,
+                    });
+                }
+                // updateCartCount();
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function addToCart(productId) {
+        const sizeInputExists = $('input[name="size"]').length > 0; // Check if size inputs exist
+        const size = $('input[name="size"]:checked').val();
+        const colorInputExists = $('input[name="color"]').length > 0; // Check if color inputs exist
+        const color = $('input[name="color"]:checked').val();
+        const quantity = $('#quantity').val();
+
+
         if (colorInputExists && !color) {
             $.Toast("Hooray!", "Please select a color", "error", {
+                timeout: 6000,
+                has_progress: true,
+            });
+            return;
+        }
+        if (sizeInputExists && !size) {
+            $.Toast("Oops!", "Please select a size", "error", {
                 timeout: 6000,
                 has_progress: true,
             });
