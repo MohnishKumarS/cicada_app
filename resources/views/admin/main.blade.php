@@ -10,6 +10,7 @@
 
     {{-- css stylesheet  --}}
     @include('admin.links.styles')
+    @stack('styles')
 
 </head>
 

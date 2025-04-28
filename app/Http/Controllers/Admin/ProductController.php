@@ -118,11 +118,11 @@ class ProductController extends Controller
             'brand_id' => 'required|exists:brands,id',
             'category_id' => 'required|exists:categories,id',
             'trending' => 'required|in:1,2',
-            'colors' => ['nullable','string'],
-            
+            'colors' => ['nullable', 'string'],
+
         ]);
 
-        $product =  Product::findOrFail($id);
+        $product = Product::findOrFail($id);
 
         $product->product_name = $request->input('product_name');
 
@@ -136,7 +136,7 @@ class ProductController extends Controller
         $product->offer_price = $request->input('offer_price');
         $product->brand_id = $request->input('brand_id');
         $product->category_id = $request->input('category_id');
-        $product->trending = $request->input('trending');        
+        $product->trending = $request->input('trending');
         $product->color = $request->input('colors');
 
         $product->status = 1;
@@ -158,7 +158,7 @@ class ProductController extends Controller
                 $extension = $image->getClientOriginalExtension();
                 $formattedProductName = Str::slug($request->input('product_name'), '_');
                 $imgName = $formattedProductName . '_' . time() . '_' . uniqid() . '.' . $extension;
-               // $imgName = time() . '_' . uniqid() . '.' . $extension;
+                // $imgName = time() . '_' . uniqid() . '.' . $extension;
                 $image->move("admin-files/products/", $imgName);
                 $additionalImages[] = $imgName;
             }
@@ -169,7 +169,8 @@ class ProductController extends Controller
         return redirect()->route('view-products')->with('msg', 'Product updated successfully.');
     }
 
-    public function toggleStatus(Request $request, $id){
+    public function toggleStatus(Request $request, $id)
+    {
         $product = Product::findOrFail($id);
         if ($product) {
             $product->status = $request->status;
@@ -189,11 +190,11 @@ class ProductController extends Controller
             if ($product->main_img) {
                 File::delete('admin-files/products/' . $product->main_img);
             }
-        
-            if($product->additional_images){
+
+            if ($product->additional_images) {
                 $additionalImages = explode(',', $product->additional_images);
                 foreach ($additionalImages as $image) {
-                    File::delete('admin-files/products/'. $image);
+                    File::delete('admin-files/products/' . $image);
                 }
             }
             $product->delete();
@@ -201,5 +202,30 @@ class ProductController extends Controller
         }
         return response()->json(['success' => false, 'message' => 'product not found']);
     }
+
+    public function deleteAdditionalImage(Request $request)
+    {
+        $product = Product::findOrFail($request->product_id);
+
+        $images = array_filter(explode(',', $product->additional_images));
+
+        if (($key = array_search($request->image, $images)) !== false) {
+            // Remove image file from storage
+            $imagePath = public_path('admin-files/products/' . $request->image);
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+
+            // Remove from database
+            unset($images[$key]);
+            $product->additional_images = implode(',', $images);
+            $product->save();
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false]);
+    }
+
 
 }

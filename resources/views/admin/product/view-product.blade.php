@@ -34,21 +34,20 @@
                       <th>Product Size</th>
                       <th>Actual Price</th>
                       <th>Offer Price</th>
-                      <th>Description</th> 
+                      {{-- <th>Description</th>  --}}
                       <th>Main Image</th>
-                      <th>Additional Image</th>
+                      {{-- <th>Additional Image</th> --}}
                       <th>Product Status</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     @php
-                       $sno=""; 
+                       $sno=1; 
                     @endphp
                     @foreach ($products as $product)
-                   @php $sno++ @endphp
                     <tr id="product-row-{{ $product->id }}">
-                      <td>{{ $sno }}</td> 
+                      <td>{{ $sno++ }}</td> 
                         {{-- <td>{{ $product->id }}</td>  --}}
                         <td>{{ $product->product_name }}</td>
                         <td>{{ $product->brand ? $product->brand->brand_name : '-' }}</td> 
@@ -56,9 +55,9 @@
                         <td>{{ $product->size }}</td>
                         <td>{{ $product->actual_price }}</td>
                         <td>{{ $product->offer_price }}</td>
-                        <td><textarea class="form-control" id="" rows="5" style="width: 350px"> {{ $product->product_description }} </pre> </textarea></td>  
-                        <td><img src="{{ asset('admin-files/products/' . $product->main_img) }}" alt="{{ $product->main_img }} Image" width="50"></td>
-                        <td> 
+                        {{-- <td><textarea class="form-control" id="" rows="5" style="width: 350px"> {{ $product->product_description }} </pre> </textarea></td>   --}}
+                        <td><img src="{{ asset('admin-files/products/' . $product->main_img) }}" alt="product Image" width="50"></td>
+                        {{-- <td> 
                         <div style="height: 100px; overflow-y:scroll;">
                             @php
                             $additionalImages = explode(',', $product->additional_images);
@@ -69,7 +68,7 @@
                         </div> 
                         @endforeach
                         </div>
-                        </td>
+                        </td> --}}
                         <td>
                           <button class="btn product-status {{ $product->status == 1 ? 'btn-success' : 'btn-danger' }}" 
                                   data-id="{{ $product->id }}" 

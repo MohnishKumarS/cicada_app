@@ -25,5 +25,13 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
+
+    protected function redirectTo()
+    {
+        session()->flash('toast', 'Hooray!'); 
+        session()->flash('type', 'success'); 
+        session()->flash('text', 'Your password has been changed successfully!');
+        return '/'; // wherever you want to send after confirmation
+    }
 }

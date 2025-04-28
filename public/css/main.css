@@ -699,10 +699,11 @@
             border-bottom: 1px solid var(--ccd-border-dark);
 
             & .footer-block_head {
-                font-size: 16px;
+                font-size: 15px;
                 text-transform: capitalize;
                 color: var(--ccd-color-primary);
-                margin-bottom: var(--ccd-base-size);
+                margin: var(--ccd-base-size) 0;
+                text-transform: uppercase;
             }
 
             & .footer-block_content {
@@ -737,6 +738,26 @@
                         }
                     }
                 }
+            }
+            & .footer-block_apps {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+        
+                .ccd-apps_link {
+                    transition: all 0.3s ease;
+        
+                    &:hover {
+                        transform: translateY(-5px);
+                    }
+                }
+        
+        
+                img {
+                    width: 140px;
+                }
+        
+        
             }
 
         }

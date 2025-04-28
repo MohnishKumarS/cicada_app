@@ -131,6 +131,43 @@
         </div>
     </section>
 
+    <!-- mobile app links -->
+    <section class="ccd-apps_section">
+        <div class="container page--width">
+            <div class="ccd-apps">
+                <div class="row  justify-content-center align-items-center">
+                    <div class="col-lg-7 mb-5 mb-lg-0">
+                        <div class="ccd-apps_text text-center text-lg-start">
+                            <h2 class="ccd-apps_title page--head">Shop Cicada Streetwear Anywhere</h2>
+                            <p class="ccd-apps_desc">Dive into the world of Cicada — the streetwear brand redefining
+                                bold fashion.
+                                Shop exclusive drops, get early access to new collections, and stay connected to the
+                                movement — all through our mobile app.
+                                Available now on iOS and Android.</p>
+                            <div class="ccd-apps_links">
+                                <a href="https://play.google.com/store/apps/details?id=com.cicada.app"
+                                    class="ccd-apps_link">
+                                    <img src="{{ asset('images/apps/Google-play-logo.png') }}" alt="Google Play"
+                                        class="img-fluid">
+                                </a>
+                                <a href="https://apps.apple.com/us/app/cicada/id123456789" class="ccd-apps_link">
+                                    <img src="{{ asset('images/apps/App-Store-logo.png') }}" alt="App Store"
+                                        class="img-fluid">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="ccd-apps_media text-center">
+                            <img src="{{ asset('images/apps/Mobile-app.png') }}" class="img-fluid"
+                                alt="cicada-mobile-apps">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     {{-- category and its products --}}
     {{-- <section>
         <div class="container page--width">
@@ -170,13 +207,76 @@
             @endforeach
         </div>
     </section> --}}
-    {{-- @php
-    use Illuminate\Support\Facades\Artisan;
-           Artisan::call('cache:clear');
-    Artisan::call('config:clear');
-    Artisan::call('config:cache');
-    Artisan::call('view:clear');
-    @endphp --}}
+
+    <style>
+        /* mobile apps */
+        .ccd-apps_section {
+            padding: 100px 0;
+            /* background: linear-gradient(180deg, #ffffff 0%, rgba(0, 0, 0, 0) 100%); */
+            background-color: #000000;
+            background-image: url('images/apps/bg-slice.png');
+            background-position: 50% 0%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            position: relative;
+            z-index: 1;
+
+            .ccd-apps {
+                .ccd-apps_text {
+                    .ccd-apps_title {
+                        margin-top: 0;
+                        font-weight: 700;
+                    }
+
+                    .ccd-apps_desc {
+                        margin-bottom: 30px;
+                        text-align: justify;
+                    }
+
+                    .ccd-apps_links {
+                        display: flex;
+                        gap: 20px;
+
+                        .ccd-apps_link {
+                            transition: all 0.3s ease;
+
+                            &:hover {
+                                transform: translateY(-5px);
+                            }
+                        }
+
+
+                        img {
+                            width: 140px;
+                        }
+
+
+                    }
+                }
+
+                .ccd-apps_media {
+                    background-image: url('images/apps/Vector-mask.svg');
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+
+                    img {
+                        width: 270px;
+                    }
+                }
+            }
+
+            @media (max-width:991px) {
+                & {
+                    padding: 50px 0;
+                }
+                & .ccd-apps_links{
+                    justify-content: center !important;
+                }
+
+            }
+        }
+    </style>
 
 @endsection
 
@@ -185,7 +285,7 @@
         const swiperBanner = new Swiper('#banner__swiper-mob', {
             "autoplay": {
                 "delay": 5000
-            }, 
+            },
             "slidesPerView": 4,
             "slidesPerGroup": 4,
             "effect": "none",

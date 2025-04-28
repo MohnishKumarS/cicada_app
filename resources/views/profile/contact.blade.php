@@ -2,6 +2,46 @@
 
 
 @section('content')
+    {{-- contact info --}}
+    <section class="pb-0">
+        <h1 class="text-center page--head">Contact Us </h1>
+        <div class="container page--width">
+            <div class="ccd-cinfo">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                        <div class="ccd-cinfo_text text-center">
+                            <div class="ccd-cinfo_icon">
+                                <img width="70" height="70" src="{{ asset('images/common/mail.png') }}"
+                                    alt="mail" />
+                            </div>
+                            <h3 class="ccd-cinfo_title">Email</h3>
+                            <p class="ccd-cinfo_desc">cicadapeoplesneed@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                        <div class="ccd-cinfo_text text-center">
+                            <div class="ccd-cinfo_icon">
+                                <img width="70" height="70" src="{{ asset('images/common/phone.png') }}"
+                                    alt="mobile" />
+                            </div>
+                            <h3 class="ccd-cinfo_title">Phone</h3>
+                            <p class="ccd-cinfo_desc">91+ 6384044807</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="ccd-cinfo_text text-center">
+                            <div class="ccd-cinfo_icon">
+                                <img width="70" height="70" src="{{ asset('images/common/location.png') }}"
+                                    alt="address" />
+                            </div>
+                            <h3 class="ccd-cinfo_title">Address</h3>
+                            <p class="ccd-cinfo_desc">21, dasd adasd ,asdsd ,chennai.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- contact us -->
     <section>
         <div class="custom-acc">
@@ -10,7 +50,7 @@
                     <div class="col-lg-10 col-md-10 col-12">
                         <div>
                             <form id="contactForm">
-                                <h1 class="custom-acc__head page--head">Contact Us</h1>
+                                <h1 class="custom-acc__head page--head">Get in touch!</h1>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-floating mb-4">
@@ -38,9 +78,6 @@
                                     <label for="message">Comments</label>
                                 </div>
 
-
-
-
                                 <div class="custom-acc__btns text-center">
                                     <button class="btn-main" type="submit">Enquiry Now</button>
                                 </div>
@@ -52,6 +89,31 @@
         </div>
     </section>
 @endsection
+
+@push('styles')
+    <style>
+        /* contact info */
+        .ccd-cinfo {
+            .ccd-cinfo_title {
+                font-size: 24px;
+                font-weight: 600;
+                margin-top: 15px;
+            }
+
+            .ccd-cinfo_desc {
+                font-size: 16px;
+                color: #D2D3D5;
+            }
+
+            @media (max-width:768px) {
+                .ccd-cinfo_icon img {
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+        }
+    </style>
+@endpush
 
 
 @push('scripts')

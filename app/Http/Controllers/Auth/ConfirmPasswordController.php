@@ -25,7 +25,14 @@ class ConfirmPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
+    // protected function redirectTo()
+    // {
+    //     // session()->flash('toast', true); 
+    //     // session()->flash('type', 'success'); 
+    //     // session()->flash('text', 'Your password has been successfully confirmed!');
+    //     return '/'; // wherever you want to send after confirmation
+    // }
 
     /**
      * Create a new controller instance.

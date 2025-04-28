@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-{{-- <div class="container">
+    {{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -54,24 +54,38 @@
                         <div>
                             <h1 class="custom-acc__head page--head mb-0">Reset your password</h1>
                             <p class="custom-acc__desc">We will send you an email to reset your password</p>
-                            <div class="form-floating mb-4">
-                                <input type="text" class="form-control" id="floatingInput"
-                                    placeholder="name@example.com">
-                                <label for="floatingInput">Email address</label>
-                            </div>
 
-                            <div class="custom-acc__btns text-center">
-                                <button class="btn-main">Submit</button>
-                                <div class="custom-acc__page">
-                                    <a href="{{route('login')}}" class="link link--text">Cancel</a>
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
                                 </div>
-                            </div>
+                            @endif
+
+                            <form action="{{ route('password.email') }}" method="POST">
+                                @csrf
+                                <div class="form-floating mb-4">
+                                    <input type="email" class="form-control" id="floatingInput" name="email" value="{{ old('email') }}" required autocomplete="email"
+                                        placeholder="name@example.com">
+                                    <label for="floatingInput">Email address</label>
+                                    @error('email')
+                                    <div class="text-danger pt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                                </div>
+                               
+
+                                <div class="custom-acc__btns text-center">
+                                    <button type="submit" class="btn-main">Submit</button>
+                                    <div class="custom-acc__page">
+                                        <a href="{{ route('login') }}" class="link link--text">Cancel</a>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-
 @endsection

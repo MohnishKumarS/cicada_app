@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="form-floating mb-4">
                                     <input type="text" class="form-control" name="mobile" placeholder="mobile" maxlength="10"
-                                        value="{{ old('mobile') }}" required autocomplete="mobile">
+                                        value="{{ old('mobile') }}" required autocomplete="mobile" onkeyup="return this.value=this.value.replace(/[^0-9]/g,'');">
                                     <label for="floatingInput">Mobile</label>
                                     @error('mobile')
                                         <span class="text-danger">

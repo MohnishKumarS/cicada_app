@@ -137,6 +137,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('edit/{id}', [ProductController::class, 'edit']);
         Route::post('update/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::delete('delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+        Route::post('delete-additional-image', [ProductController::class, 'deleteAdditionalImage'])->name('product.deleteAdditionalImage');
+
     });
 
     Route::prefix('order')->group(function(){
@@ -170,6 +172,8 @@ Route::get('/clear', function() {
  Route::fallback(function () {
     return view('errors.404');
  });
+
+ Route::view('admin','errors.404');
  
 
 

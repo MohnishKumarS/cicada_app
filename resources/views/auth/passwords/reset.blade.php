@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -61,5 +61,61 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+
+    <!-- update password -->
+    <section>
+        <div class="custom-acc">
+            <div class="container">
+                <div class="row justify-content-center px-3 px-sm-0">
+                    <div class="col-lg-6 col-md-10 col-12">
+                        <div>
+                            <h1 class="custom-acc__head page--head mb-0">Set Your New Password</h1>
+                            <p class="custom-acc__desc">Choose a new password and keep your account safe and secure.</p>
+                  
+
+                            <form action="{{ route('password.update') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="token" value="{{ $token }}">
+
+                                <div class="form-floating mb-4">
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email"
+                                        placeholder="name@example.com">
+                                    <label for="email">Email Address</label>
+                                    @error('email')
+                                    <div class="text-danger pt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                                </div>
+                                <div class="form-floating mb-4">
+                                    <input type="password" class="form-control" id="newPass" name="password"  required autocomplete="new-password"
+                                        placeholder="name@example.com">
+                                    <label for="newPass">Password</label>
+                                    @error('password')
+                                    <div class="text-danger pt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                                </div>
+                                <div class="form-floating mb-4">
+                                    <input type="password" class="form-control" id="confirmPass" name="password_confirmation"  required autocomplete="new-password"
+                                        placeholder="name@example.com">
+                                    <label for="confirmPass">Confirm Password</label>
+                                </div>
+                               
+
+                                <div class="custom-acc__btns text-center">
+                                    <button type="submit" class="btn-main">Reset Password</button>
+                                    <div class="custom-acc__page">
+                                        <a href="{{ route('login') }}" class="link link--text">Cancel</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
