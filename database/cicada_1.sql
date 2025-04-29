@@ -27,6 +27,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `banners`
 --
 
+use `thestore_cicada_db`;
+
 CREATE TABLE `banners` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `image` varchar(255) NOT NULL,

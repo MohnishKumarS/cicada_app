@@ -40,34 +40,35 @@
                            <div class="row products--row">
                                @forelse ($products as $product)
                                    <div class="col-lg-3 col-6 col-md-4">
-                                       <div class="ccd-card animate__animated animate__fadeIn animate__delay-3s ">
-                                           <div class="ccd-card__media">
-                                               <img src="{{ asset('admin-files/products/' . $product->main_img) }}"
-                                                   class="ccd-card__img" alt="{{ $product->slug }}" loading="lazy">
+                                       <a href="{{ route('product.show', ['slug' => $product->slug]) }}">
+                                           <div class="ccd-card animate__animated animate__fadeIn animate__delay-3s ">
+                                               <div class="ccd-card__media">
+                                                   <img src="{{ asset('admin-files/products/' . $product->main_img) }}"
+                                                       class="ccd-card__img" alt="{{ $product->slug }}" loading="lazy">
+                                               </div>
+                                               <div class="ccd-card__content">
+                                                   <h3 class="ccd-card__title">
+                                                       {{ $product->product_name }}
+                                                   </h3>
+                                                   <p class="ccd-card__info">
+                                                       <span class="ccd-card__org">Rs. {{ $product->actual_price }}</span>
+                                                       <span class="ccd-card__sell">Rs. {{ $product->offer_price }}</span>
+                                                   </p>
+                                               </div>
                                            </div>
-                                           <div class="ccd-card__content">
-                                               <h3 class="ccd-card__title">
-                                                   <a href="{{ route('product.show', ['slug' => $product->slug]) }}"
-                                                       class="link link--hover">{{ $product->product_name }}</a>
-                                               </h3>
-                                               <p class="ccd-card__info">
-                                                   <span class="ccd-card__org">Rs. {{ $product->actual_price }}</span>
-                                                   <span class="ccd-card__sell">Rs. {{ $product->offer_price }}</span>
-                                               </p>
-                                           </div>
+                                       </a>
+                                   </div>
+                               @empty
+                                   <div class="ccd--empty">
+                                       <div class="ccd-empty__icon">
+                                           <img src="{{ asset('images/cicada.webp') }}" class="img-fluid ccd-empty__logo"
+                                               width="100" height="100" alt="cicada-logo">
+                                       </div>
+                                       <h3 class="ccd-empty__title page--head">Products is Not Available Yet!</h3>
+                                       <div class="ccd-empty__link">
+                                           <a href="{{ url('collections') }}" class="btn-main">Return to Shop</a>
                                        </div>
                                    </div>
-                                   @empty
-                                   <div class="ccd--empty" >
-                                    <div class="ccd-empty__icon">
-                                        <img src="{{asset('images/cicada.webp')}}" class="img-fluid ccd-empty__logo" width="100" height="100"
-                                            alt="cicada-logo">
-                                    </div>
-                                    <h3 class="ccd-empty__title page--head">Products is Not Available Yet!</h3>
-                                    <div class="ccd-empty__link">
-                                        <a href="{{url('collections')}}" class="btn-main">Return to Shop</a>
-                                    </div>
-                                </div>
                                @endforelse
                            </div>
                        </div>
@@ -139,5 +140,3 @@
            </form>
        </div>
    @endsection
-
-
