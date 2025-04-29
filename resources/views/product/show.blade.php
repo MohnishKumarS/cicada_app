@@ -330,6 +330,8 @@
 
                         @foreach ($related_product as $pro)
                             <div class="col-lg-3 col-6 col-md-4">
+                                <a href="{{ route('product.show', ['slug' => $pro->slug]) }}"
+                                    class="link link--hover">
                                 <div class="ccd-card">
                                     <div class="ccd-card__media">
                                         <img src="{{ asset('admin-files/products/' . $pro->main_img) }}"
@@ -337,8 +339,7 @@
                                     </div>
                                     <div class="ccd-card__content">
                                         <h3 class="ccd-card__title">
-                                            <a href="{{ route('product.show', ['slug' => $pro->slug]) }}"
-                                                class="link link--hover">{{ $pro->product_name }}</a>
+                                            {{ $pro->product_name }}
                                         </h3>
                                         <p class="ccd-card__info">
                                             <span class="ccd-card__org">Rs {{ $pro->actual_price }}</span>
@@ -346,6 +347,7 @@
                                         </p>
                                     </div>
                                 </div>
+                            </a>
                             </div>
                         @endforeach
                     </div>

@@ -47,7 +47,7 @@
                         </li>
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#banners_list">
-                                <i class="fas fa-layer-group"></i>
+                                <i class="fas fa-image"></i>
                                 <p>Banners</p>
                                 <span class="caret"></span>
                             </a>
@@ -69,7 +69,7 @@
                         </li>
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#brands_list">
-                                <i class="fas fa-layer-group"></i>
+                                <i class="fas fa-ghost"></i>
                                 <p>Brands</p>
                                 <span class="caret"></span>
                             </a>
@@ -90,7 +90,7 @@
                         </li>
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#category_list">
-                                <i class="fas fa-layer-group"></i>
+                                <i class="fas fa-book"></i>
                                 <p>Category</p>
                                 <span class="caret"></span>
                             </a>
@@ -111,7 +111,7 @@
                         </li>
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#products_list">
-                                <i class="fas fa-layer-group"></i>
+                                <i class="fas fa-tag"></i>
                                 <p>Products</p>
                                 <span class="caret"></span>
                             </a>
@@ -133,7 +133,7 @@
                         </li>
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#orders_list">
-                                <i class="fas fa-layer-group"></i>
+                                <i class="fas fa-trophy"></i>
                                 <p>Orders</p>
                                 <span class="caret"></span>
                             </a>
@@ -151,7 +151,7 @@
                         </li>
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#register_list">
-                                <i class="fas fa-layer-group"></i>
+                                <i class="fas fa-users"></i>
                                 <p>Registration</p>
                                 <span class="caret"></span>
                             </a>

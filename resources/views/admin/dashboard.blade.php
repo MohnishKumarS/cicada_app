@@ -80,8 +80,8 @@
                     </div>
                     <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                            <p class="card-category">Users</p>
-                            <h4 class="card-title">{{$totalUsers}}</h4>
+                            <p class="card-category">Orders</p>
+                            <h4 class="card-title">{{$totalOrders}}</h4>
                         </div>
                     </div>
                 </div>
@@ -129,5 +129,130 @@
 </div>
 
 
+{{-- chart js --}}
+<div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Orders Chart</div>
+        </div>
+        <div class="card-body">
+          <div class="chart-container">
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">User Register Chart</div>
+        </div>
+        <div class="card-body">
+          <div class="chart-container">
+            <canvas id="userBarChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{{-- chart js end --}}
+
+
 
 @endsection
+
+@push('scripts')
+<script>
+    var lineChart = document.getElementById("lineChart").getContext("2d"),
+    userBarChart = document.getElementById("userBarChart").getContext("2d");
+
+      var myLineChart = new Chart(lineChart, {
+        type: "line",
+        data: {
+          labels: {!! json_encode($ordersLabels) !!},
+          datasets: [
+            {
+              label: "Active Orders",
+              borderColor: "#1d7af3",
+              pointBorderColor: "#FFF",
+              pointBackgroundColor: "#1d7af3",
+              pointBorderWidth: 2,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 1,
+              pointRadius: 4,
+              backgroundColor: "transparent",
+              fill: true,
+              borderWidth: 2,
+              data: {!! json_encode($ordersMonthlyCounts) !!},
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            position: "bottom",
+            labels: {
+              padding: 10,
+              fontColor: "#1d7af3",
+            },
+          },
+          tooltips: {
+            bodySpacing: 4,
+            mode: "nearest",
+            intersect: 0,
+            position: "nearest",
+            xPadding: 10,
+            yPadding: 10,
+            caretPadding: 10,
+          },
+          layout: {
+            padding: { left: 15, right: 15, top: 15, bottom: 15 },
+          },
+        },
+      });
+
+      var myBarChart = new Chart(userBarChart, {
+        type: "bar",
+        data: {
+          labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ],
+          datasets: [
+            {
+              label: "Users",
+              backgroundColor: "rgb(23, 125, 255)",
+              borderColor: "rgb(23, 125, 255)",
+              data: {!! json_encode($userMonthlyCounts) !!},
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+
+      </script>
+@endpush

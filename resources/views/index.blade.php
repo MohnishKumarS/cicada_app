@@ -93,43 +93,45 @@
     @endif
 
     {{-- latest trend --}}
-    <section>
-        <div class="container page--width">
+    @if ($latestProducts->count())
+        <section>
+            <div class="container page--width">
 
-            <h2 class="page--title text-capitalize">Latest Collections</h2>
-            <div class="row mb-2 products--row">
-                @foreach ($latestProducts as $product)
-                    <div class="col-lg-3 col-6 col-md-4">
-                        <div class="ccd-card">
-                            <div class="ccd-card__media">
-                                <img src="{{ asset('admin-files/products/' . $product->main_img) }}" class="ccd-card__img"
-                                    alt="{{ $product->slug }}" loading="lazy">
-                            </div>
-                            <div class="ccd-card__content">
-                                <h3 class="ccd-card__title">
-                                    <a href="{{ route('product.show', ['slug' => $product->slug]) }}"
-                                        class="link link--hover">
-                                        {{ $product->product_name }}
-                                    </a>
-                                </h3>
-                                <p class="ccd-card__info">
-                                    <span class="ccd-card__org">Rs {{ $product->actual_price }}</span>
-                                    <span class="ccd-card__sell">Rs {{ $product->offer_price }}</span>
-                                </p>
-                            </div>
+                <h2 class="page--title text-capitalize">Latest Collections</h2>
+                <div class="row mb-2 products--row">
+                    @foreach ($latestProducts as $product)
+                        <div class="col-lg-3 col-6 col-md-4">
+                            <a href="{{ route('product.show', ['slug' => $product->slug]) }}" class="">
+                                <div class="ccd-card">
+                                    <div class="ccd-card__media">
+                                        <img src="{{ asset('admin-files/products/' . $product->main_img) }}"
+                                            class="ccd-card__img" alt="{{ $product->slug }}" loading="lazy">
+                                    </div>
+                                    <div class="ccd-card__content">
+                                        <h3 class="ccd-card__title">
+                                            {{ $product->product_name }}
+                                        </h3>
+                                        <p class="ccd-card__info">
+                                            <span class="ccd-card__org">Rs {{ $product->actual_price }}</span>
+                                            <span class="ccd-card__sell">Rs {{ $product->offer_price }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+
+                </div>
+                {{-- "See more" button --}}
+                <div class="ccd-card__link text-center">
+                    <a href="{{ route('collections') }}" class="btn-main">Explore Now</a>
+                </div>
+
 
             </div>
-            {{-- "See more" button --}}
-            <div class="ccd-card__link text-center">
-                <a href="{{ route('collections') }}" class="btn-main">Explore Now</a>
-            </div>
+        </section>
+    @endif
 
-
-        </div>
-    </section>
 
     <!-- mobile app links -->
     <section class="ccd-apps_section">
@@ -270,7 +272,8 @@
                 & {
                     padding: 50px 0;
                 }
-                & .ccd-apps_links{
+
+                & .ccd-apps_links {
                     justify-content: center !important;
                 }
 

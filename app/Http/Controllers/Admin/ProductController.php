@@ -38,7 +38,7 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'main_img' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
             'additional_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'trending' => 'required|in:1,2',
+            'trending' => 'required|in:1,0',
             'colors' => 'nullable|string',
         ]);
 
@@ -117,7 +117,7 @@ class ProductController extends Controller
             'offer_price' => 'nullable|integer|min:1',
             'brand_id' => 'required|exists:brands,id',
             'category_id' => 'required|exists:categories,id',
-            'trending' => 'required|in:1,2',
+            'trending' => 'required|in:1,0',
             'colors' => ['nullable', 'string'],
 
         ]);
@@ -139,7 +139,6 @@ class ProductController extends Controller
         $product->trending = $request->input('trending');
         $product->color = $request->input('colors');
 
-        $product->status = 1;
 
 
         if ($request->hasFile('main_img')) {

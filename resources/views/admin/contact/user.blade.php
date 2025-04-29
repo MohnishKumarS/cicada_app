@@ -19,7 +19,7 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Mobile</th>
-                                            <th>Status</th>
+                                            <th>Orders</th>
                                             <th>Created at</th>
                                         </tr>
                                     </thead>
@@ -31,16 +31,13 @@
                                             @php $sno++ @endphp
                                             <tr>
                                                 <td>{{ $sno }}</td>
-                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->name}}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->mobile }}</td>
                                                 <td>
-                                                    {{ Carbon\Carbon::parse($user->created_at)->diffForHumans() }}
+                                                    {{ $user->orders_count}}
                                                 </td>
-                                                <td>{{ $user->created_at->format('d-M-Y') }}</td>
-
-
-
+                                                <td>{{ $user->created_at->format('d-M-Y') }} <br> {{ Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</td>
                                             </tr>
                                         @endforeach
 

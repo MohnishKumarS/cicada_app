@@ -17,6 +17,9 @@
               <h4 class="card-title">All Products</h4>
             </div>
             <div class="card-body">
+              @if (session('msg'))
+                        <h5 class="alert alert-success">{{ session('msg') }}</h5>
+                    @endif
               <div id="categoryTable-msg" class="mb-5 mt-2"></div>
               <div class="table-responsive">
                 <table

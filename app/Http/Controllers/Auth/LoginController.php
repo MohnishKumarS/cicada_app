@@ -35,7 +35,7 @@ class LoginController extends Controller
         }
         elseif(Auth::user()->role == 'user') // Normal or Default User Login
         {
-            return redirect('/')->with('title',"You're logged in successfully")->with('status','success');;
+            return redirect('/')->with('text',"You're logged in successfully")->with('type','success')->with('toast','Ching-chang!');
         }
     }
 

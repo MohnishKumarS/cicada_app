@@ -732,6 +732,7 @@ label {
             height: 1.8rem;
             background: transparent;
             margin: 0 !important;
+            opacity: 1;
         }
         .swiper-pagination-bullet:after, .swiper-pagination-bullet::before{
             content: '';

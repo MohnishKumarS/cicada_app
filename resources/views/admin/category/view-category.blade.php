@@ -11,6 +11,9 @@
               <h4 class="card-title">All Brands</h4>
             </div>
             <div class="card-body">
+              @if (session('msg'))
+              <h5 class="alert alert-success">{{ session('msg') }}</h5>
+          @endif
               <div id="categoryTable-msg" class="mb-5 mt-2"></div>
               <div class="table-responsive">
                 <table
@@ -44,7 +47,7 @@
                           <button class="btn category-status {{ $category->status == 1 ? 'btn-success' : 'btn-danger' }}" 
                                   data-id="{{ $category->id }}" 
                                   data-status="{{ $category->status }}">
-                              {{ $category->category_status == 1 ? 'Active' : 'Inactive' }}
+                              {{ $category->status == 1 ? 'Active' : 'Inactive' }}
                           </button>
                       </td>
                         <td>

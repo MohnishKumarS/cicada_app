@@ -158,8 +158,8 @@
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="trending"
-                                                value="2" id="trending2"
-                                                {{ old('trending', $product->trending) == 2 ? 'checked' : '' }}>
+                                                value="0" id="trending2"
+                                                {{ old('trending', $product->trending) == 0 ? 'checked' : '' }}>
                                             <label class="form-check-label" for="trending2">
                                                 No
                                             </label>

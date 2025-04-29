@@ -76,7 +76,7 @@ class OrderController extends Controller
         }
         // Clear the cart
         Cookie::queue(Cookie::forget('cart'));
-        return view('payment.success')->with([
+        return redirect()->route('payment.success')->with([
           'toast' => 'Hooray!',
           'type' => 'success',
           'text' => 'Order placed successfully!'
@@ -274,6 +274,7 @@ class OrderController extends Controller
           'text'  => 'Something went wrong. Please contact support.'
         ]);
       } catch (\Exception $th) {
+        // return 'An error occurred: ' . $th->getMessage();
         return redirect()->route('checkout')->with('toast', 'Oops!')->with('type', 'error')->with('text', 'An error occurred: ' . $th->getMessage());
       }
     }

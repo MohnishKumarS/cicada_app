@@ -248,7 +248,7 @@
         var currentStatus = $(this).data('status');
         var newStatus = currentStatus == 1 ? 0 : 1;
         // console.log(productId, currentStatus, newStatus)
-        if (confirm("Are you sure you want to delete this product?") == true) {
+        if (confirm("Are you sure you want to disabled this product?") == true) {
             $.ajax({
             url: '{{ url('/product/product-status') }}/' + productId,
             type: 'POST',

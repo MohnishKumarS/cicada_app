@@ -119,7 +119,7 @@ class BrandController extends Controller
             $brand->brand_img = $imgName;
         }
 
-        $brand->brand_status = $request->input('brand_status', 1); // Default active
+        // $brand->brand_status = $request->input('brand_status', 1); // Default active
 
         $brand->save();
 

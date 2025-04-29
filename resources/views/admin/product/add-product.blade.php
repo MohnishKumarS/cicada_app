@@ -192,7 +192,7 @@
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="trending" value="2" id="trending2" >
+                      <input class="form-check-input" type="radio" name="trending" value="0" id="trending2" >
                       <label class="form-check-label" for="trending2">
                         No
                       </label>

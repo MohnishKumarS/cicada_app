@@ -14,8 +14,8 @@ class ViewProductController extends Controller
 
     public function homePage()
     {
-        $featuredProducts = Product::where('trending', 1)->take(6)->get();
-        $latestProducts = Product::latest()->take(4)->get();
+        $featuredProducts = Product::where('trending', 1)->where('status',1)->latest()->take(6)->get();
+        $latestProducts = Product::where('status',1)->latest()->take(4)->get();
         $brands = Brands::where('brand_status',1)->where('slug','!=','cicada')->get();
         $category_products = Category::where('status', 1)
             ->with(['product' => function ($query) {

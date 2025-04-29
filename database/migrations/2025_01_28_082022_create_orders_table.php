@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('mobile');
             $table->text('message')->nullable();
             $table->string('payment_method'); // 'cod' or 'online'
-            $table->string('payment_id')->nullable(); 
+            $table->mediumText('payment_id')->nullable(); 
             $table->integer('total_amount');
             $table->string('status')->default('0');
             $table->string('user_device')->nullable();
