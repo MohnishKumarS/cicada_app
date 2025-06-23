@@ -1,6 +1,6 @@
 <section>
     <div class="container page--width">
-        <h2 class="page--title">Top Featured Drop</h2>
+        <h2 class="page--title">Seecada</h2>
         <div class="ccd-product-slider">
             <div class="swiper" id="productSwiper">
                 <div class="swiper-wrapper">

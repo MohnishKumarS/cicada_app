@@ -34,7 +34,7 @@
                             <ul class="footer-block_content">
                                 <li><a href="mailto:cicadapeoplesneed@gmail.com"
                                         class="link link--hover text-break">cicadapeoplesneed@gmail.com</a></li>
-                                <li><a href="tel:91+6384044807" class="link link--hover">91+ 6384044807</a></li>
+                                <li><a href="tel:91+6384044807" class="link link--hover">+91 6384044807</a></li>
                                 <li><a href="{{ route('policy.privacy') }}" class="link link--hover">Privacy Policy</a>
                                 </li>
                                 <li><a href="{{ route('policy.shipping') }}" class="link link--hover">Shipping & return

@@ -52,9 +52,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="{{route('collections')}}">Collections</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('contactus')}}">ContactUs</a>
                     </li>
@@ -92,9 +92,9 @@
                 <li class="ccd-menu__item">
                     <a href="{{url('/')}}"  class="ccd-menu__link {{Request::is('/')? 'active':''}}">Home</a>
                 </li>
-                <li class="ccd-menu__item">
+                {{-- <li class="ccd-menu__item">
                     <a href="{{route('collections')}}" class="ccd-menu__link {{Request::is('collections')? 'active':''}}">Collections</a>
-                </li>
+                </li> --}}
                 <li class="ccd-menu__item">
                     <a href="{{route('contactus')}}" class="ccd-menu__link {{Request::is('contact-us')? 'active':''}}">ContactUs</a>
                 </li>

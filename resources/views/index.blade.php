@@ -3,13 +3,14 @@
 
 @section('content')
     <!-- hero banner -->
-    <section>
+    {{-- <section>
         <div class="ccd-banners">
             <div class="">
                 <div class="ccd-banner__mob lg-hide">
                     <div class="swiper" id="banner__swiper-mob">
                         <div class="swiper-wrapper">
-                            <!-- Slides -->
+                         
+
                             @forelse ($mobBanner as $val)
                                 <div class="swiper-slide">
 
@@ -40,12 +41,12 @@
 
 
                         </div>
-                        <!-- If we need pagination -->
-                        <div class="swiper-pagination"></div>
+                        
+                        <div class="swiper-pagination"></div> 
 
                     </div>
                 </div>
-                {{-- desk view --}}
+               
                 <div class="ccd-banner__desk sm-hide">
                     <div class="ccd-banner__slide">
                         @if ($deskBanner)
@@ -60,7 +61,48 @@
                 </div>
             </div>
         </div>
+    </section> --}}
+
+    <!-- hero text -->
+    <section>
+        <div class="container">
+            <div class="ccd-hero-txt">
+                <h1 class="ccd-hero-txt__title">Discover "Be Greatness" with CICADA</h1>
+                <p class="ccd-hero-txt__desc">
+                    we trace each step that leads them to greatness
+                </p>
+                <!-- <a href="products.html" class="btn btn--primary">Shop Now</a> -->
+            </div>
+        </div>
     </section>
+    <style>
+        .ccd-hero-txt {
+            font-family: Helvetica, Arial, sans-serif;
+            padding: 100px 20px 0;
+            text-align: center;
+
+            .ccd-hero-txt__title {
+                font-size: 50px;
+                margin-bottom: 20px;
+            }
+
+            .ccd-hero-txt__desc {
+                color: #b2b2b2;
+                font-size: 18px;
+            }
+
+            @media (max-width: 576px) {
+                & {
+                    padding-top: 50px
+                }
+
+                .ccd-hero-txt__title {
+                    font-size: 28px;
+                }
+
+            }
+        }
+    </style>
 
     @include('home-parts.featureProduct', ['featuredProducts' => $featuredProducts])
 
@@ -133,42 +175,7 @@
     @endif
 
 
-    <!-- mobile app links -->
-    <section class="ccd-apps_section">
-        <div class="container page--width">
-            <div class="ccd-apps">
-                <div class="row  justify-content-center align-items-center">
-                    <div class="col-lg-7 mb-5 mb-lg-0">
-                        <div class="ccd-apps_text text-center text-lg-start">
-                            <h2 class="ccd-apps_title page--head">Shop Cicada Streetwear Anywhere</h2>
-                            <p class="ccd-apps_desc">Dive into the world of Cicada — the streetwear brand redefining
-                                bold fashion.
-                                Shop exclusive drops, get early access to new collections, and stay connected to the
-                                movement — all through our mobile app.
-                                Available now on iOS and Android.</p>
-                            <div class="ccd-apps_links">
-                                <a href="https://play.google.com/store/apps/details?id=com.cicada.app"
-                                    class="ccd-apps_link">
-                                    <img src="{{ asset('images/apps/Google-play-logo.png') }}" alt="Google Play"
-                                        class="img-fluid">
-                                </a>
-                                <a href="https://apps.apple.com/us/app/cicada/id123456789" class="ccd-apps_link">
-                                    <img src="{{ asset('images/apps/App-Store-logo.png') }}" alt="App Store"
-                                        class="img-fluid">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="ccd-apps_media text-center">
-                            <img src="{{ asset('images/apps/Mobile-app.png') }}" class="img-fluid"
-                                alt="cicada-mobile-apps">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     {{-- category and its products --}}
     {{-- <section>
@@ -210,13 +217,50 @@
         </div>
     </section> --}}
 
+    <!-- mobile app links -->
+    <section class="ccd-apps_section">
+        <div class="container page--width">
+            <div class="ccd-apps">
+                <div class="row  justify-content-center align-items-center">
+                    <div class="col-lg-7">
+                        <div class="ccd-apps_text text-center text-lg-start">
+                            <h2 class="ccd-apps_title page--head">Shop Anywhere</h2>
+                            <p class="ccd-apps_desc">Dive into the world of Cicada — the streetwear brand redefining
+                                bold fashion.
+                                Shop exclusive drops, get early access to new collections, and stay connected to the
+                                movement — all through our mobile app.
+                                Available now on iOS and Android.</p>
+                            {{-- <div class="ccd-apps_links">
+                                <a href="https://play.google.com/store/apps/details?id=com.cicada.app"
+                                    class="ccd-apps_link">
+                                    <img src="{{ asset('images/apps/Google-play-logo.png') }}" alt="Google Play"
+                                        class="img-fluid">
+                                </a>
+                                <a href="https://apps.apple.com/us/app/cicada/id123456789" class="ccd-apps_link">
+                                    <img src="{{ asset('images/apps/App-Store-logo.png') }}" alt="App Store"
+                                        class="img-fluid">
+                                </a>
+                            </div> --}}
+                        </div>
+                    </div>
+                    <div class="col-lg-5 sm-hide">
+                        <div class="ccd-apps_media text-center">
+                            <img src="{{ asset('images/apps/Mobile-app.png') }}" class="img-fluid"
+                                alt="cicada-mobile-apps">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <style>
         /* mobile apps */
         .ccd-apps_section {
             padding: 100px 0;
             /* background: linear-gradient(180deg, #ffffff 0%, rgba(0, 0, 0, 0) 100%); */
             background-color: #000000;
-            background-image: url('images/apps/bg-slice.png');
+            /* background-image: url('images/apps/bg-slice.png'); */
             background-position: 50% 0%;
             background-repeat: no-repeat;
             background-size: contain;
@@ -226,12 +270,13 @@
             .ccd-apps {
                 .ccd-apps_text {
                     .ccd-apps_title {
+                        text-transform: uppercase;
                         margin-top: 0;
                         font-weight: 700;
                     }
 
                     .ccd-apps_desc {
-                        margin-bottom: 30px;
+                        /* margin-bottom: 30px; */
                         text-align: justify;
                     }
 
