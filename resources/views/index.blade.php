@@ -64,7 +64,7 @@
     </section> --}}
 
     <!-- hero text -->
-    <section>
+    {{-- <section>
         <div class="container">
             <div class="ccd-hero-txt">
                 <h1 class="ccd-hero-txt__title">Discover "Be Greatness" with CICADA</h1>
@@ -100,6 +100,99 @@
                     font-size: 28px;
                 }
 
+            }
+        }
+    </style> --}}
+    <section>
+        <div class="ccd-text-anime">
+            <div>Discover "Be Greatness" with CICADA</div>
+            <div>we trace each step that leads them to greatness</div>
+            <div>Dive into the world of Cicada</div>
+            <div>"cicada" is a streetwear-based fashion house</div>
+            <div>We are rewriting the rules of streetwear</div>
+        </div>
+    </section>
+    
+    <style>
+        /* hero text anime */
+        .ccd-text-anime {
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            color: #fff;
+            width: 100vw;
+            height: 40vh;
+            font-weight: 500;
+            font-size: 28px;
+            position: relative;
+            overflow: hidden;
+            line-height: 1
+        }
+    
+        .ccd-text-anime>div {
+            animation: come2life linear 10s infinite;
+            transform-origin: center center;
+            opacity: 0;
+            width: 250px;
+            height: 200px;
+            position: absolute;
+            backface-visibility: hidden;
+        }
+    
+        .ccd-text-anime>div:nth-child(1) {
+            left: 30vw;
+            top: 10vh;
+            animation-delay: 0s;
+        }
+    
+        .ccd-text-anime>div:nth-child(2) {
+            left: 10vw;
+            top: 20vh;
+            animation-delay: 4s;
+        }
+    
+        .ccd-text-anime>div:nth-child(3) {
+            left: 20vw;
+            top: 20vh;
+            animation-delay: 8s;
+        }
+    
+        .ccd-text-anime>div:nth-child(4) {
+            left: 25vw;
+            top: 10vh;
+            animation-delay: 6s;
+        }
+    
+        .ccd-text-anime>div:nth-child(5) {
+            left: 40vw;
+            top: 30vh;
+            animation-delay: 2s;
+        }
+    
+        @keyframes come2life {
+            0% {
+                transform: scale3d(0, 0, 1) rotate(0.02deg);
+                opacity: 0;
+                filter: blur(10px);
+            }
+    
+            25% {
+                transform: scale3d(1, 1, 1) rotate(0.02deg);
+                opacity: 1;
+                filter: blur(0px);
+            }
+    
+            40% {
+                opacity: 1;
+                filter: blur(0px);
+            }
+    
+            80% {
+                opacity: 0;
+            }
+    
+            100% {
+                transform: scale3d(3, 3, 1) rotate(0.02deg);
+                filter: blur(10px);
             }
         }
     </style>
