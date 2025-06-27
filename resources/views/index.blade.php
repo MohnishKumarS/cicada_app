@@ -105,11 +105,11 @@
     </style> --}}
     <section>
         <div class="ccd-text-anime">
-            <div>Discover "Be Greatness" with CICADA</div>
-            <div>we trace each step that leads them to greatness</div>
-            <div>Dive into the world of Cicada</div>
-            <div>"cicada" is a streetwear-based fashion house</div>
-            <div>We are rewriting the rules of streetwear</div>
+            <div>discover “be greatness” with cicada</div>
+            <div>seacada - engineered compressions</div>
+            {{-- <div>Dive into the world of Cicada</div> --}}
+            <div>cicada - timeless through every season</div>
+            <div>seacada - power. precision. performance</div>
         </div>
     </section>
     
@@ -318,10 +318,7 @@
                     <div class="col-lg-7">
                         <div class="ccd-apps_text text-center text-lg-start">
                             <h2 class="ccd-apps_title page--head">Shop Anywhere</h2>
-                            <p class="ccd-apps_desc">Dive into the world of Cicada — the streetwear brand redefining
-                                bold fashion.
-                                Shop exclusive drops, get early access to new collections, and stay connected to the
-                                movement — all through our mobile app.
+                            <p class="ccd-apps_desc">All through our mobile app.
                                 Available now on iOS and Android.</p>
                             {{-- <div class="ccd-apps_links">
                                 <a href="https://play.google.com/store/apps/details?id=com.cicada.app"

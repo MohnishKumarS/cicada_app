@@ -128,14 +128,15 @@
                                     Now</button>
                             </div>
 
-                            <div class="product__desc">
+                            {{-- <div class="product__desc">
                                 <ul>
                                     <li>Unisex</li>
                                     <li>220 GSM</li>
                                     <li>Fabric : 100% cotton</li>
                                     <li>Soft, Breathable and Oversized Fit</li>
                                 </ul>
-                            </div>
+                            </div> --}}
+
                             <div class="product__info">
 
                                 <div class="product__accordion accordion">
@@ -151,7 +152,7 @@
                                                     </path>
                                                 </svg>
                                                 <h2 class="h4 accordion__title inline-richtext">
-                                                    Size Chart
+                                                    Product Description
                                                 </h2>
                                             </div>
                                             <svg aria-hidden="true" focusable="false" class="icon icon-caret"
@@ -166,9 +167,16 @@
                                         <div class="accordion__content"
                                             id="ProductAccordion-collapsible-row-0-template--22125670007096__main">
 
-                                            <div class="text-center"><img class="img-fluid size-img"
-                                                    src="https://cdn.shopify.com/s/files/1/0685/4279/1992/files/Untitled_design_-_2023-03-17T161428.021_480x480.png?v=1679220480"
-                                                    alt="size-chart"></div>
+                                            <div class="text-center">
+                                                @if ($product->category->id == '6')
+                                                    <img class="img-fluid size-img"
+                                                        src="{{ asset('images/chart/compression.jpg') }}"
+                                                        alt="size-chart">
+                                                @else
+                                                    <img class="img-fluid size-img"
+                                                        src="{{ asset('images/chart/tshirt.jpg') }}" alt="size-chart">
+                                                @endif
+                                            </div>
                                         </div>
                                     </details>
                                 </div>
@@ -217,6 +225,7 @@
                                         </div>
                                     </details>
                                 </div>
+
                                 <div class="product__accordion accordion">
                                     <details id="Details-collapsible-row-2-template--22125670007096__main">
                                         <summary role="button" aria-expanded="false"
@@ -330,24 +339,23 @@
 
                         @foreach ($related_product as $pro)
                             <div class="col-lg-3 col-6 col-md-4">
-                                <a href="{{ route('product.show', ['slug' => $pro->slug]) }}"
-                                    class="link link--hover">
-                                <div class="ccd-card">
-                                    <div class="ccd-card__media">
-                                        <img src="{{ asset('admin-files/products/' . $pro->main_img) }}"
-                                            class="ccd-card__img" alt="{{ $pro->slug }}" loading="lazy">
+                                <a href="{{ route('product.show', ['slug' => $pro->slug]) }}" class="link link--hover">
+                                    <div class="ccd-card">
+                                        <div class="ccd-card__media">
+                                            <img src="{{ asset('admin-files/products/' . $pro->main_img) }}"
+                                                class="ccd-card__img" alt="{{ $pro->slug }}" loading="lazy">
+                                        </div>
+                                        <div class="ccd-card__content">
+                                            <h3 class="ccd-card__title">
+                                                {{ $pro->product_name }}
+                                            </h3>
+                                            <p class="ccd-card__info">
+                                                <span class="ccd-card__org">Rs {{ $pro->actual_price }}</span>
+                                                <span class="ccd-card__sell">Rs {{ $pro->offer_price }}</span>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="ccd-card__content">
-                                        <h3 class="ccd-card__title">
-                                            {{ $pro->product_name }}
-                                        </h3>
-                                        <p class="ccd-card__info">
-                                            <span class="ccd-card__org">Rs {{ $pro->actual_price }}</span>
-                                            <span class="ccd-card__sell">Rs {{ $pro->offer_price }}</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
+                                </a>
                             </div>
                         @endforeach
                     </div>

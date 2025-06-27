@@ -11,9 +11,7 @@
                                 CICADA
                             </h2>
                             <div class="footer-block_content">
-                                <p class="mb-0">"cicada" is a streetwear-based fashion house, born from bold creativity
-                                    and a
-                                    passion for pushing limits. We are rewriting the rules of streetwear. Embrace
+                                <p class="mb-0"> Embrace
                                     the fusion of construction, artistry, and fearless attitude in every stitch.</p>
                             </div>
                         </div>

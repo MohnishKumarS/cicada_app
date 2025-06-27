@@ -140,14 +140,15 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-floating mb-4">
-                                    <input type="password" class="form-control" name="password" placeholder="password"
-                                        value="{{ old('password') }}" required autocomplete="password">
-                                    <label for="floatingInput">Password</label>
+                                <div class="form-floating mb-4 position-relative">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                                        required autocomplete="password">
+                                    <label for="password">Password</label>
+                                    <span class="position-absolute top-50 end-0 translate-middle-y me-3" onclick="togglePassword()" style="cursor:pointer;">
+                                        <i class="fa fa-eye" id="toggleIcon"></i>
+                                    </span>
                                     @error('password')
-                                        <span class="text-danger">
-                                            {{ $message }}
-                                        </span>
+                                        <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
 
@@ -164,4 +165,20 @@
             </div>
         </div>
     </section>
+
+    <script>
+        function togglePassword() {
+            const input = document.getElementById("password");
+            const icon = document.getElementById("toggleIcon");
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                input.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        }
+        </script>
 @endsection

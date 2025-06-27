@@ -81,6 +81,9 @@
                         timeout: 6000,
                         has_progress: true,
                     });
+                    setTimeout(function() {
+                        window.location.href = "/login";
+                    }, 1200);
                 }
                 // updateCartCount();
             },
